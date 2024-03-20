@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+</script>
+
 <template>
   <div class="home-search-bar">
     <input class="home-search-bar-input" type="text" placeholder="Преподаватель, предмет..." />
