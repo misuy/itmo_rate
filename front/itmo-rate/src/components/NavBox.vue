@@ -41,7 +41,10 @@ import AboutIcon from '@/components/icons/AboutIcon.vue'
 .nav-box {
   display: flex;
   align-items: center;
+  gap: 22px;
   flex-direction: column;
   width: 100%;
+  margin-top: 15px;
 }
+
 </style>

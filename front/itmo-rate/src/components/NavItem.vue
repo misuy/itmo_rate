@@ -15,9 +15,8 @@
   display: flex;
   align-items: center;
   height: 25px;
-  margin-top: 12px;
-  margin-bottom: 12px;
   width: 100%;
+  cursor: pointer;
 }
 
 .nav-item-icon {
@@ -35,7 +34,13 @@
 .nav-item-name {
   color: #656d7c;
   margin-left: 15px;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   font-size: 15px;
+  user-select: none;
 }
+
+.nav-item:hover * {
+  opacity: 0.95;
+}
+
 </style>

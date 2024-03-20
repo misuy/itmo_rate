@@ -30,6 +30,8 @@
     right: 12px;
     user-select: none;
     -webkit-user-drag: none;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .home-search-bar-input:focus {

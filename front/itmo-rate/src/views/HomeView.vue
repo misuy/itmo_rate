@@ -33,7 +33,7 @@ import HomeSearchBar from '@/components/HomeSearchBar.vue';
 .itmo-rate-logo {
     width: auto;
     height: 80px;
-    margin-top: 7%;
+    margin-top: 88px;
 }
 
 .home-search-bar-holder {
