@@ -27,8 +27,8 @@
 }
 
 .nav-icon {
-    height: 100%;
-    width: auto;
+  height: 100%;
+  width: auto;
 }
 
 .nav-item-name {
@@ -42,5 +42,4 @@
 .nav-item:hover * {
   opacity: 0.95;
 }
-
 </style>

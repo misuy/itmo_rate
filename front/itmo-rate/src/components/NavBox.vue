@@ -46,5 +46,4 @@ import AboutIcon from '@/components/icons/AboutIcon.vue'
   width: 100%;
   margin-top: 15px;
 }
-
 </style>

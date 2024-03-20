@@ -40,6 +40,6 @@ import UserBox from '@/components/UserBox.vue'
 }
 
 .nav-box-holder {
-    width: 70%;
+  width: 70%;
 }
 </style>
