@@ -7,8 +7,9 @@
 
 <style>
 .home-search-bar {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
+    position: relative;
     align-items: center;
 }
 
@@ -25,7 +26,10 @@
 .magnifier-icon {
     height: 25px;
     width: auto;
-    margin-left: -40px;
+    position:absolute;
+    right: 12px;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .home-search-bar-input:focus {

@@ -38,6 +38,6 @@ import HomeSearchBar from '@/components/HomeSearchBar.vue';
 
 .home-search-bar-holder {
     margin-top: 15px;
-    width: 43%;
+    width: 45%;
 }
 </style>
