@@ -1,3 +1,21 @@
+:root {
+  --background-color: #FEFEFF;
+  --panel-background-color: #F8F9FC;
+  --background-blue-color: #E2EAFF; /* aka blue light+ */
+  --background-yellow-color: #FFF9E2; /* aka yellow light+ */
+
+  --strokes-color: #C3CDE1;
+  --strokes-yellow-color: #E8CE8B; /* aka yellow light */
+  --strokes-blue-color: #AEC5FF; /* aka blue light */
+  --highlight-color: #4780DD;
+
+  --text-grey-color: #828791;
+  --text-color-2: #656D7C;
+  --text-color: #25272B;
+  --text-yellow-color: #7B6A2A;
+  --text-blue-color: #345B94;
+}
+
 html {
   width: 100%;
   height: 100%;

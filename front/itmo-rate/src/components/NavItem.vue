@@ -36,8 +36,8 @@ const props = defineProps({
 }
 
 .nav-icon {
-  height: 100%;
-  width: auto;
+  height: 28px;
+  width: 28px
 }
 
 .nav-item-name {

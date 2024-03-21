@@ -11,6 +11,7 @@ const testTeachers = [new RatedListItemInfo(4.4, 'Соснов Николай Ф
 const substr = ref('')
 const relatedSubjects = computed(() => testSubjects.filter((item) => item.name.toLowerCase().includes(substr.value.toLowerCase())))
 const relatedTeachers = computed(() => testTeachers.filter((item) => item.name.toLowerCase().includes(substr.value.toLowerCase())))
+
 </script>
 
 <template>

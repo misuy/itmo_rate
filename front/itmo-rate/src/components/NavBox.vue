@@ -3,6 +3,7 @@ import NavItem from '@/components/NavItem.vue'
 import HomeIcon from '@/components/icons/HomeIcon.vue'
 import ClassIcon from '@/components/icons/ClassIcon.vue'
 import AboutIcon from '@/components/icons/AboutIcon.vue'
+import TeachersIcon from "@/components/icons/TeachersIcon.vue";
 </script>
 
 <template>
@@ -16,7 +17,7 @@ import AboutIcon from '@/components/icons/AboutIcon.vue'
 
     <NavItem :route-to="'/teachers'">
       <template #icon>
-        <HomeIcon />
+        <TeachersIcon />
       </template>
       <template #name> Преподаватели </template>
     </NavItem>
