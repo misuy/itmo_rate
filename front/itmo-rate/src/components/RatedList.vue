@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
+import ListHeader from './ListHeader.vue';
 import RatedListItem, { RatedListItemInfo } from './RatedListItem.vue';
 
-const props = defineProps({
+defineProps({
     name: String,
     items: Array<RatedListItemInfo>,
 })
@@ -10,17 +11,10 @@ const props = defineProps({
 
 <template>
     <div class="rated-list">
-        <div class="rated-list-header">
-            <div class="rated-list-name">
-                {{ props.name }}
-            </div>
-            <div class="rated-list-items-count">
-                {{ props.items?.length }}
-            </div>
-        </div>
+        <ListHeader :name="name" :count="items?.length" />
         <hr size="1" class="rated-list-divider" />
         <div class="rated-list-items">
-            <RatedListItem v-for="item in props.items" :info="item" />
+            <RatedListItem v-for="item in items" :info="item" />
         </div>
     </div>
 </template>
@@ -32,25 +26,8 @@ const props = defineProps({
     flex-direction: column;
 }
 
-.rated-list-header {
-    display: flex;
-    align-items: center;
-    font-size: 23px;
-    font-weight: 600;
-    margin-bottom: 3px;
-}
-
-.rated-list-name {
-    color: black;
-    margin-right: 7px;
-}
-
-.rated-list-items-count {
-    color: #D7DFEC;
-}
-
 .rated-list-divider {
-    color: #c3cde1;
+    color: var(--strokes-color);
     width: 100%;
     margin: 0;
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps, reactive } from 'vue';
+import RatingCircle from './RatingCircle.vue';
 
 const props = defineProps({
     info: RatedListItemInfo,
@@ -35,11 +36,7 @@ function ratingToColor(rating: number): string {
 
 <template>
     <div class="rated-list-item">
-        <div class="rated-list-item-rating-circle" :style="{ backgroundColor: ratingToColor(props.info?.rating!) }">
-            <div class="rated-list-item-rating">
-                {{ props.info?.rating.toFixed(1) }}
-            </div>
-        </div>
+        <RatingCircle :rating="props.info?.rating" radius="18"/>
 
         <div class="rated-list-item-info-box">
             <div class="rated-list-item-name">
@@ -60,24 +57,7 @@ function ratingToColor(rating: number): string {
     align-items: center;
     margin-top: 10px;
     margin-bottom: 0px;
-}
-
-.rated-list-item-rating-circle {
-    display: flex;
-    align-items: center;
-    width: 25px;
-    aspect-ratio: 1 / 1;
-    border-radius: 100%;
-    padding: 5px;
-    color: white;
-    font-weight: 600;
-    font-size: 15px;
-    margin-right: 10px;
-}
-
-.rated-list-item-rating {
-    width: 100%;
-    text-align: center;
+    gap: 15px;
 }
 
 .rated-list-item-info-box {
