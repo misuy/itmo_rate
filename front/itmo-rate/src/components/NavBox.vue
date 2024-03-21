@@ -7,28 +7,28 @@ import AboutIcon from '@/components/icons/AboutIcon.vue'
 
 <template>
   <div class="nav-box">
-    <NavItem>
+    <NavItem :route-to="'/'">
       <template #icon>
         <HomeIcon />
       </template>
       <template #name> Главная </template>
     </NavItem>
 
-    <NavItem>
+    <NavItem :route-to="'/teachers'">
       <template #icon>
         <HomeIcon />
       </template>
       <template #name> Преподаватели </template>
     </NavItem>
 
-    <NavItem>
+    <NavItem :route-to="'/subjects'">
       <template #icon>
         <ClassIcon />
       </template>
       <template #name> Предметы </template>
     </NavItem>
 
-    <NavItem>
+    <NavItem :route-to="'/about'">
       <template #icon>
         <AboutIcon />
       </template>

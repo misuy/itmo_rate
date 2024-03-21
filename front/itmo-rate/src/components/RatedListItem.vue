@@ -4,8 +4,6 @@ import { defineProps, reactive } from 'vue';
 const props = defineProps({
     info: RatedListItemInfo,
 })
-
-console.log(props.info)
 </script>
 
 <script lang="ts">

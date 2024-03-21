@@ -1,5 +1,14 @@
+<script setup lang="ts">
+import { defineProps } from 'vue';
+import router from '@/router';
+
+const props = defineProps({
+  routeTo: String,
+})
+</script>
+
 <template>
-  <div class="nav-item">
+  <div @click="router.push(routeTo!)" class="nav-item">
     <div class="nav-item-icon">
       <slot name="icon"></slot>
     </div>

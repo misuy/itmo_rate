@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+
+const input = ref('')
+const emit = defineEmits({
+  inputChanged: String,
+})
+watch(input, (input) => emit('inputChanged', input))
 </script>
 
 <template>
   <div class="home-search-bar">
-    <input class="home-search-bar-input" type="text" placeholder="Преподаватель, предмет..." />
+    <input v-model="input" class="home-search-bar-input" type="text" placeholder="Преподаватель, предмет..." />
     <img class="magnifier-icon" src="@/assets/icons/MagnifierIcon.svg" />
   </div>
 </template>
