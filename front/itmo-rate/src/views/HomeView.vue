@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import LeftPanelView from '@/views/LeftPanelView.vue'
-import HomeSearchBar from '@/components/HomeSearchBar.vue'
-import Subject from '@/components/Subject.vue';
-import { SubjectInfo, SubjectOwner } from '@/components/Subject.vue';
 
-const testSubjectInfo = new SubjectInfo(6.8, 'Основы проектной деятельности', new SubjectOwner('ПИиКТ', 'BT'));
 </script>
 
 <template>
