@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-  <div class="chip-body" v-bind:class="{'yellow-style': yellowStyle, 'blue-style': blueStyle}">
+  <div class="chip-body" :class="{'yellow-style': yellowStyle, 'blue-style': blueStyle}">
     <span>{{text}}</span>
   </div>
 </template>

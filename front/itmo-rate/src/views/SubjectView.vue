@@ -3,10 +3,18 @@ import LeftPanelView from "@/views/LeftPanelView.vue";
 import ChipComponent from "@/components/ChipComponent.vue";
 import RatingCircle from "@/components/RatingCircle.vue";
 import CommonButton from "@/components/CommonButton.vue";
+import ListHeader from "@/components/ListHeader.vue";
+import ReviewCard from "@/components/ReviewCard.vue";
 
 export default {
   name: "SubjectView",
-  components: {CommonButton, RatingCircle, ChipComponent, LeftPanelView}
+  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, LeftPanelView, ReviewCard},
+  data() {
+    return {
+      lecturers: ["Клименков Сергей Викторович", "Соснов Николай\n Федорович"],
+      teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"]
+    }
+  }
 }
 </script>
 
@@ -31,30 +39,30 @@ export default {
               <h3>Оценки</h3>
               <div class="avg-rating-container">
                 <div class="avg-rating">
-                  <RatingCircle rating="4.5"/>
+                  <RatingCircle :rating="4.5"/>
                   <span>Критерий 1</span>
                 </div>
                 <div class="avg-rating">
-                  <RatingCircle rating="7.5"/>
+                  <RatingCircle :rating="7.5"/>
                   <span>Критерий 2</span>
                 </div>
                 <div class="avg-rating">
-                  <RatingCircle rating="9"/>
+                  <RatingCircle :rating="9"/>
                   <span>Критерий 3</span>
                 </div>
                 <div class="avg-rating">
-                  <RatingCircle rating="1.5"/>
+                  <RatingCircle :rating="1.5"/>
                   <span>Критерий 4</span>
                 </div>
                 <div class="avg-rating">
-                  <RatingCircle rating="4.5"/>
+                  <RatingCircle :rating="4.5"/>
                   <span>Критерий 5</span>
                 </div>
               </div>
             </div>
             <div class="subject-info-right">
               <RatingCircle rating="6.5" radius="100"/>
-              <CommonButton style="font-size: 20px; height: 40px; width: 250px">
+              <CommonButton style="font-size: 20px; height: 40px; width: 260px">
                 <template #text> Добавить отзыв </template>
                 <template #icon>
                   <img src="../assets/icons/PlusIcon.svg" />
@@ -63,15 +71,24 @@ export default {
             </div>
           </div>
           <div class="reviews-block">
-
+            <ReviewCard/>
+            <ReviewCard/>
+            <ReviewCard/>
+            <ReviewCard/>
           </div>
         </div>
         <div class="side-column">
-          <div class="lecturers-block">
-
+          <div class="teachers-block yellow">
+            <ListHeader name="Лекторы" :count="lecturers.length" :font-size="20"/>
+            <ul>
+              <li v-for="lecturer in lecturers"> {{lecturer}} </li>
+            </ul>
           </div>
-          <div class="teachers-block">
-
+          <div class="teachers-block blue">
+            <ListHeader name="Преподаватели" :count="teachers.length" :font-size="20"/>
+            <ul>
+              <li v-for="teacher in teachers" > {{teacher}} </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -103,6 +120,43 @@ h3 {
   color: var(--text-color);
   margin-bottom: 12px;
   margin-top: 25px;
+}
+
+.teachers-block {
+  margin-top: 25px;
+  position: relative;
+}
+
+.teachers-block li::marker {
+  content: ' ';
+}
+
+.teachers-block li::before {
+  content: ' ';
+  width: 12px;
+  height: 12px;
+  border-radius: 15px;
+  position: absolute;
+  left: 15px;
+  margin-top: 3px;
+}
+
+.teachers-block.yellow li::before {
+  border: solid var(--strokes-yellow-color) 1px;
+  background: var(--background-yellow-color);
+}
+
+.teachers-block.blue li::before {
+  border: solid var(--strokes-blue-color) 1px;
+  background: var(--background-blue-color);
+}
+
+.reviews-block {
+  display: flex;
+  flex-wrap: wrap;
+  column-count: auto;
+  gap: 25px;
+  margin-top: 45px;
 }
 
 .content {
@@ -137,8 +191,11 @@ h3 {
 }
 
 .side-column {
-  width: 380px;
-  background: red;
+  /* width: 380px; */
+  /*background: red;*/
+}
+.main-column {
+  flex-shrink: 10;
 }
 
 .avg-rating-container {
@@ -160,13 +217,6 @@ h3 {
 .chip-container {
   display: flex;
   gap: 10px;
-}
-
-.h-line {
-  width: 100%;
-  height: 1px;
-  background: var(--strokes-color);
-  margin-top: 5px;
 }
 
 .home-view {

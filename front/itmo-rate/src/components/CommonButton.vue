@@ -23,7 +23,7 @@ export default {
   justify-content: center;
   font-weight: 500;
   border-radius: 10px;
-  gap: 5px;
+  gap: 10px;
   padding: 10px 20px;
   background: var(--text-color-2);
 }
