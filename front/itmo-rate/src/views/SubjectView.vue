@@ -1,5 +1,4 @@
 <script lang="ts">
-import LeftPanelView from "@/views/LeftPanelView.vue";
 import ChipComponent from "@/components/ChipComponent.vue";
 import RatingCircle from "@/components/RatingCircle.vue";
 import CommonButton from "@/components/CommonButton.vue";
@@ -8,7 +7,7 @@ import ReviewCard from "@/components/ReviewCard.vue";
 
 export default {
   name: "SubjectView",
-  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, LeftPanelView, ReviewCard},
+  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, ReviewCard},
   data() {
     return {
       lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
@@ -20,7 +19,6 @@ export default {
 
 <template>
   <div class="home-view">
-    <LeftPanelView />
     <div class="content">
       <div class="page-header">
         <h2 class="prefix-h">Предметы \ </h2>
@@ -162,7 +160,7 @@ h3 {
 
 .content {
   /*border: solid red 2px;*/
-  width: 80%;
+  width: 100%;
   margin-top: 30px;
   margin-left: 3em;
   margin-right: 3em;
