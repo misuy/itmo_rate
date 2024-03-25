@@ -7,15 +7,14 @@ const testTeachers = [new RatedListItemInfo(4.4, 'Соснов Николай Ф
 </script>
 
 <template>
-    <div class="teachers-view">
-      <LeftPanelView />
-      <div class="teachers-view-content">
-        <div class="teachers-list">
-          <RatedList :name="'Преподаватели'" :items="testTeachers" />
-        </div>
+  <div class="teachers-view">
+    <div class="teachers-view-content">
+      <div class="teachers-list">
+        <RatedList :name="'Преподаватели'" :items="testTeachers" />
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
 <style scoped>
   .teachers-view {
@@ -37,4 +36,3 @@ const testTeachers = [new RatedListItemInfo(4.4, 'Соснов Николай Ф
     width: 85%;
   }
 </style>
-  

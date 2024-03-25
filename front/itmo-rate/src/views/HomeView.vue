@@ -16,7 +16,6 @@ const relatedTeachers = computed(() => testTeachers.filter((item) => item.name.t
 
 <template>
   <div class="home-view">
-    <LeftPanelView />
     <div class="home-view-content">
       <img class="itmo-rate-logo" src="@/assets/itmo_rate_logo.svg" />
       <div class="home-search-bar-holder">

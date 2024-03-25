@@ -8,7 +8,6 @@ const testSubjects = [new RatedListItemInfo(6.8, 'Основы проектно�
 
 <template>
     <div class="subjects-view">
-      <LeftPanelView />
       <div class="subjects-view-content">
         <div class="subjects-list">
           <RatedList :name="'Предметы'" :items="testSubjects" />

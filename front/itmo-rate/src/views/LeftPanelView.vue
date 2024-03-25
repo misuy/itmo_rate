@@ -23,6 +23,8 @@ import UserBox from '@/components/UserBox.vue'
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: fixed;
+  z-index: 1;
   height: 100%;
   min-width: 220px;
 }
@@ -33,13 +35,14 @@ import UserBox from '@/components/UserBox.vue'
   margin-bottom: 20px;
 }
 
-.user-box-holder {
-  position: sticky;
-  width: 77%;
-  top: 83%;
-}
-
 .nav-box-holder {
   width: 70%;
+  margin-bottom: 40px;
+}
+
+.user-box-holder {
+  width: 77%;
+  margin-top: auto;
+  margin-bottom: 30px;
 }
 </style>

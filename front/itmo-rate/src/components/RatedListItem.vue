@@ -36,7 +36,7 @@ function ratingToColor(rating: number): string {
 
 <template>
     <div class="rated-list-item">
-        <RatingCircle :rating="props.info?.rating" radius="18"/>
+        <RatingCircle :rating="props.info?.rating" :radius="18"/>
 
         <div class="rated-list-item-info-box">
             <div class="rated-list-item-name">
