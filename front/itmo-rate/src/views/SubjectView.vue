@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import LeftPanelView from "@/views/LeftPanelView.vue";
 import ChipComponent from "@/components/ChipComponent.vue";
 import RatingCircle from "@/components/RatingCircle.vue";
@@ -11,7 +11,7 @@ export default {
   components: {ListHeader, CommonButton, RatingCircle, ChipComponent, LeftPanelView, ReviewCard},
   data() {
     return {
-      lecturers: ["Клименков Сергей Викторович", "Соснов Николай\n Федорович"],
+      lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
       teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"]
     }
   }
@@ -157,25 +157,29 @@ h3 {
   column-count: auto;
   gap: 25px;
   margin-top: 45px;
+  /* justify-content: center; */
 }
 
 .content {
   /*border: solid red 2px;*/
   width: 80%;
   margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 3em;
+  margin-right: 3em;
 }
 
 .page-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 3em;
 }
 
 .subject-info-block {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  /* justify-content: center; */
   gap: 10px;
 }
 
@@ -185,8 +189,9 @@ h3 {
 .subject-info-right {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 32px;
+  justify-content: start;
+  margin-top: 25px;
+  gap: 25px;
   align-items: center;
 }
 
