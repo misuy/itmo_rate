@@ -4,18 +4,18 @@ export default {
   name: "RatingBar",
   props: {
     score: {
-      type: Array<Number>,
+      type: Array<number>,
       default: [0, 0, 0, 0, 0],
-      validator: (value) => value.length == 5
+      validator: (value: Array<Number>) => value.length == 5
     }
   },
-  computed: {
-    computeColor() {
-      if (this.rating <= 2.5)
+  methods: {
+    computeColor(rating: number) {
+      if (rating <= 2.5)
         return "#FF0000";
-      else if (this.rating <= 5)
+      else if (rating <= 5)
         return "#E3B064";
-      else if (this.rating <= 7.5)
+      else if (rating <= 7.5)
         return "#ABE364";
       else
         return "#85E364";
@@ -27,10 +27,12 @@ export default {
 <template>
   <div class="container">
     <div v-for="s in score" class="rating-rect">
-      <div class="rating" :style="{background: computeColor}">
+      <div class="rating" :style="{background: computeColor(s)}">
         <spa>{{ s }}</spa>
       </div>
-      <div class="char">A</div>
+      <div class="char">
+        A
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +42,9 @@ export default {
 .container {
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-between;
   font-size: 18px;
   font-weight: 700;
 }

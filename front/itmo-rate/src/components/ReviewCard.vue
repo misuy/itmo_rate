@@ -21,7 +21,7 @@ export default {
   background: var(--panel-background-color);
   border-radius: 15px;
   padding: 20px;
-  max-width: 360px;
+  margin-bottom: 25px;
 }
 
 </style>

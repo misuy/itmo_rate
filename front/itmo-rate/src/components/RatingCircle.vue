@@ -2,7 +2,10 @@
 export default {
   name: "RatingCircle",
   props: {
-    rating: Number,
+    rating: {
+      type: Number,
+      default: 0
+    },
     radius: {
       type: Number,
       default: 24,
@@ -27,8 +30,8 @@ export default {
 </script>
 
 <template>
-  <div v-bind:style="{background: computeColor, width: computeSize, height: computeSize, borderRadius: computeSize}">
-    <span> {{rating}} </span>
+  <div :style="{background: computeColor, width: computeSize, height: computeSize, borderRadius: computeSize}">
+    <span> {{ rating }} </span>
   </div>
 </template>
 

@@ -4,8 +4,9 @@ import RatingCircle from "@/components/RatingCircle.vue";
 import CommonButton from "@/components/CommonButton.vue";
 import ListHeader from "@/components/ListHeader.vue";
 import ReviewCard from "@/components/ReviewCard.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "SubjectView",
   components: {ListHeader, CommonButton, RatingCircle, ChipComponent, ReviewCard},
   data() {
@@ -14,7 +15,7 @@ export default {
       teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"]
     }
   }
-}
+})
 </script>
 
 <template>
@@ -158,9 +159,10 @@ h3 {
 }
 
 .reviews-block {
-  display: flex;
-  flex-wrap: wrap;
-  column-count: auto;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  columns: 2 auto;
+  /* column-width: auto; */
   gap: 25px;
   margin-top: 45px;
   /* justify-content: center; */
@@ -184,14 +186,12 @@ h3 {
 .subject-info-block {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  /* justify-content: center; */
+  /* flex-wrap: wrap; */
   gap: 10px;
+  justify-content: space-between;
+  max-width: 760px
 }
 
-.subject-info-left {
-  max-width: 450px
-}
 .subject-info-right {
   display: flex;
   flex-direction: column;
@@ -211,17 +211,17 @@ h3 {
 
 .avg-rating-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   gap: 10px 25px;
-  max-width: 500px;
+  /* max-width: 350px; */
 }
 
 .avg-rating {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  font-size: 18px;
+  gap: 8px;
+  font-size: 16px;
   font-weight: 500;
 }
 

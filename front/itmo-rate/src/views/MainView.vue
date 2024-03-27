@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import LeftPanelView from './LeftPanelView.vue';
+import SubjectView from './SubjectView.vue';
 </script>
 
 <template>
   <div class="main-view">
     <LeftPanelView />
     <div class="main-content">
-      <RouterView />
+      <!-- <RouterView /> -->
+      <SubjectView />
     </div>
   </div>
 </template>
