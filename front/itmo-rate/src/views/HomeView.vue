@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import LeftPanelView from '@/views/LeftPanelView.vue'
 import HomeSearchBar from '@/components/HomeSearchBar.vue'
-import { RatedListItemInfo } from '@/components/RatedListItem.vue';
 import RatedList from '@/components/RatedList.vue';
 import { computed, ref } from 'vue';
+import RatedListItemInfo from '@/classes/RatedListClassesInfo';
 
 const testSubjects = [new RatedListItemInfo(6.8, 'Основы проектной деятельности', ['ПИиКТ', 'BT']), new RatedListItemInfo(2.8, 'ТПО', ['ПИиКТ', 'BT', 'Нейротех'])];
 const testTeachers = [new RatedListItemInfo(4.4, 'Соснов Николай Федорович', ['Методы криптографии', 'Компьютерные сети', 'ТПО']), new RatedListItemInfo(7.2, 'Соснов Семен Федорович', ['Методы криптографии', 'Компьютерные сети', 'ТПО'])]
@@ -17,9 +16,9 @@ const relatedTeachers = computed(() => testTeachers.filter((item) => item.name.t
 <template>
   <div class="home-view">
     <div class="home-view-content">
-      <img class="itmo-rate-logo" src="@/assets/itmo_rate_logo.svg" />
+      <img class="itmo-rate-logo" src="@/assets/itmo_rate_logo.svg">
       <div class="home-search-bar-holder">
-        <HomeSearchBar @input-changed="(input) => substr=input"/>
+        <HomeSearchBar @input-changed="(input) => substr=input" />
       </div>
       <div class="subjects-list">
         <RatedList :name="'Предметы'" :items="relatedSubjects" />

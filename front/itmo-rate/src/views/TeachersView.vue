@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import LeftPanelView from './LeftPanelView.vue';
-import { RatedListItemInfo } from '@/components/RatedListItem.vue';
 import RatedList from '@/components/RatedList.vue';
+import RatedListItemInfo from '@/classes/RatedListClassesInfo';
 
 const testTeachers = [new RatedListItemInfo(4.4, 'Соснов Николай Федорович', ['Методы криптографии', 'Компьютерные сети', 'ТПО']), new RatedListItemInfo(7.2, 'Соснов Семен Федорович', ['Методы криптографии', 'Компьютерные сети', 'ТПО'])]
 </script>

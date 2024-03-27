@@ -3,12 +3,12 @@ import LeftPanelView from './LeftPanelView.vue';
 </script>
 
 <template>
-    <div class="main-view">
-        <LeftPanelView />
-        <div class="main-content">
-            <RouterView />
-        </div>
+  <div class="main-view">
+    <LeftPanelView />
+    <div class="main-content">
+      <RouterView />
     </div>
+  </div>
 </template>
 
 <style scoped>

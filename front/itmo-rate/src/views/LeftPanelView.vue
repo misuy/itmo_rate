@@ -5,7 +5,7 @@ import UserBox from '@/components/UserBox.vue'
 
 <template>
   <div class="left-panel">
-    <img class="itmo-logo" src="@/assets/itmo_logo.svg" />
+    <img class="itmo-logo" src="@/assets/itmo_logo.svg">
 
     <div class="nav-box-holder">
       <NavBox />

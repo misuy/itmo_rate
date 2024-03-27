@@ -2,12 +2,15 @@
 import { defineProps } from 'vue';
 
 defineProps({
-  routeTo: String,
+  routeTo: {
+    type: String,
+    default: "/"
+  }
 })
 </script>
 
 <template>
-  <div @click="router.push(routeTo)" class="nav-item">
+  <div @click="$router.push(routeTo)" class="nav-item">
     <div class="nav-item-icon">
       <slot name="icon" />
     </div>
