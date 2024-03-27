@@ -1,5 +1,4 @@
-<script>
-
+<script lang="ts">
 export default {
   name: "ChipComponent",
   props: {
@@ -23,7 +22,7 @@ export default {
 
 <template>
   <div class="chip-body" :class="{'yellow-style': yellowStyle, 'blue-style': blueStyle}">
-    <span>{{text}}</span>
+    <span class="chip-span">{{ text }}</span>
   </div>
 </template>
 
@@ -46,12 +45,12 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   display: flex;
+  font-size: 16px;
   align-items: center;
 }
 
-.chip-body span {
+.chip-span {
   display: inline;
-  font-size: 16px;
   text-align: center;
 }
 </style>

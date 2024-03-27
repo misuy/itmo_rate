@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ListHeader from './ListHeader.vue';
-import RatedListItem, { RatedListItemInfo } from './RatedListItem.vue';
+import RatedListItem from './RatedListItem.vue';
+import RatedListItemInfo from '@/classes/RatedListClassesInfo';
 
 defineProps({
     name: String,
@@ -9,12 +10,12 @@ defineProps({
 </script>
 
 <template>
-    <div class="rated-list">
-        <ListHeader :name="name" :count="items?.length" />
-        <div class="rated-list-items">
-            <RatedListItem v-for="item in items" :info="item" />
-        </div>
+  <div class="rated-list">
+    <ListHeader :name="name" :count="items?.length" />
+    <div class="rated-list-items">
+      <RatedListItem v-for="item in items" :info="item" :key="item.name" />
     </div>
+  </div>
 </template>
 
 <style>

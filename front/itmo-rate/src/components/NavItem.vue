@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import router from '@/router';
 
-const props = defineProps({
+defineProps({
   routeTo: String,
 })
 </script>
 
 <template>
-  <div @click="router.push(routeTo!)" class="nav-item">
+  <div @click="router.push(routeTo)" class="nav-item">
     <div class="nav-item-icon">
-      <slot name="icon"></slot>
+      <slot name="icon" />
     </div>
 
     <div class="nav-item-name">
-      <slot name="name" class="nav-item-name"></slot>
+      <slot name="name" class="nav-item-name" />
     </div>
   </div>
 </template>

@@ -12,28 +12,36 @@ import TeachersIcon from "@/components/icons/TeachersIcon.vue";
       <template #icon>
         <HomeIcon />
       </template>
-      <template #name> Главная </template>
+      <template #name>
+        Главная
+      </template>
     </NavItem>
 
     <NavItem :route-to="'/teachers'">
       <template #icon>
         <TeachersIcon />
       </template>
-      <template #name> Преподаватели </template>
+      <template #name>
+        Преподаватели
+      </template>
     </NavItem>
 
     <NavItem :route-to="'/subjects'">
       <template #icon>
         <ClassIcon />
       </template>
-      <template #name> Предметы </template>
+      <template #name>
+        Предметы
+      </template>
     </NavItem>
 
     <NavItem :route-to="'/about'">
       <template #icon>
         <AboutIcon />
       </template>
-      <template #name> О сервисе </template>
+      <template #name>
+        О сервисе
+      </template>
     </NavItem>
   </div>
 </template>

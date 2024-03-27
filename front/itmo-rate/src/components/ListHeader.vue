@@ -13,15 +13,15 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="rated-list-header">
-        <div class="rated-list-name" v-bind:style="{fontSize: fontSize + 'px'}">
-            {{ props.name }}
-        </div>
-        <div v-if="count != -1" class="rated-list-items-count" v-bind:style="{fontSize: fontSize + 'px'}">
-            {{ props.count }}
-        </div>
+  <div class="rated-list-header">
+    <div class="rated-list-name" :style="{fontSize: fontSize + 'px'}">
+      {{ props.name }}
     </div>
-    <div class="h-line"></div>
+    <div v-if="count != -1" class="rated-list-items-count" :style="{fontSize: fontSize + 'px'}">
+      {{ props.count }}
+    </div>
+  </div>
+  <div class="h-line" />
 </template>
 
 <style scoped>

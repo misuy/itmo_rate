@@ -1,19 +1,19 @@
-<template>
-<div class="button">
-  <span>
-    <slot name="text"></slot>
-  </span>
-  <div class="icon">
-    <slot name="icon"></slot>
-  </div>
-</div>
-</template>
-
-<script>
+<script lang="ts">
 export default {
   name: "CommonButton"
 }
 </script>
+
+<template>
+  <div class="button">
+    <span>
+      <slot name="text" />
+    </span>
+    <div class="icon">
+      <slot name="icon" />
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .button {

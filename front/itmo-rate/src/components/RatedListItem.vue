@@ -1,54 +1,32 @@
 <script setup lang="ts">
-import { defineProps, reactive } from 'vue';
+import { defineProps } from 'vue';
 import RatingCircle from './RatingCircle.vue';
+import ChipComponent from "@/components/ChipComponent.vue";
+import RatedListItemInfo from '@/classes/RatedListClassesInfo';
 
 const props = defineProps({
     info: RatedListItemInfo,
 })
 </script>
 
-<script lang="ts">
-// move declarations to another file
-
-export class RatedListItemInfo {
-    rating: number;
-    name: string;
-    tags: string[];
-
-    constructor (rating: number, name: string, tags: string[]) {
-        this.rating = rating;
-        this.name = name;
-        this.tags = tags;
-    }
-}
-
-function ratingToColor(rating: number): string {
-    if (rating <= 2.5)
-        return "#FF0000";
-    else if (rating <= 5)
-        return "#E3B064";
-    else if (rating <= 7.5)
-        return "#ABE364";
-    else
-        return "#85E364";
-}
-</script>
-
 <template>
-    <div class="rated-list-item">
-        <RatingCircle :rating="props.info?.rating" :radius="18"/>
+  <div class="rated-list-item">
+    <RatingCircle :rating="props.info?.rating" :radius="18" />
 
-        <div class="rated-list-item-info-box">
-            <div class="rated-list-item-name">
-                {{ props.info?.name }}
-            </div>
-            <div class="rated-list-item-tags-box">
-                <div class="rated-list-item-tag" v-for="(tag, idx) in props.info?.tags" :class="idx % 2 == 0 ? 'rated-list-item-tag-even' : 'rated-list-item-tag-odd'">
-                    {{ tag }}
-                </div>
-            </div>
-        </div>
+    <div class="rated-list-item-info-box">
+      <div class="rated-list-item-name">
+        {{ props.info?.name }}
+      </div>
+      <div class="rated-list-item-tags-box">
+        <ChipComponent
+          style="font-size: 13px" 
+          v-for="(tag, idx) in props.info?.tags" :key="tag" 
+          :text="tag" 
+          :color="idx % 2 == 0 ? 'yellow' : 'blue'"
+        />
+      </div>
     </div>
+  </div>
 </template>
 
 <style>
@@ -72,23 +50,21 @@ function ratingToColor(rating: number): string {
 }
 
 .rated-list-item-tags-box {
-    display: flex;
-    align-items: center;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .rated-list-item-tag {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 7px;
-    border: 1px solid black;
-    font-weight: 500;
-    font-size: 13px;
-    border-radius: 12px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: 3px 10px;
+  margin-right: 7px;
+  border: 1px solid black;
+  font-weight: 500;
+  font-size: 13px;
+  border-radius: 12px;
 }
 
 .rated-list-item-tag-even {

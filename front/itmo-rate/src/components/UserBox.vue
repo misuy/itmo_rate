@@ -3,13 +3,19 @@
 <template>
   <div class="user-box">
     <div class="user-info-box">
-      <img class="user-img" src="../assets/icons/UserIcon.svg" />
+      <img class="user-img" src="../assets/icons/UserIcon.svg">
       <div class="user-name">
-        <div class="user-name-surname">Ненов</div>
-        <div class="user-name-name">Владислав</div>
+        <div class="user-name-surname">
+          Ненов
+        </div>
+        <div class="user-name-name">
+          Владислав
+        </div>
       </div>
     </div>
-    <button class="user-exit-btn">Выйти</button>
+    <button class="user-exit-btn">
+      Выйти
+    </button>
   </div>
 </template>
 

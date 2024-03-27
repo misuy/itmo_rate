@@ -1,15 +1,25 @@
-/* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
-
 module.exports = {
-  root: true,
-  'extends': [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier/skip-formatting'
+  "env": {
+    "browser": true,
+    "es2023": true,
+    "node": true
+  },
+  // "parser": "@typescript-eslint/parser",
+  // "plugins":[
+  //   "@typescript-eslint"
+  // ],
+  "extends": [
+    "eslint:recommended",
+    // "plugin:@typescript-eslint/eslint-recommended",
+    // "plugin:@typescript-eslint/recommended",
+    'plugin:vue/vue3-strongly-recommended',
+    '@vue/eslint-config-typescript'
   ],
-  parserOptions: {
-    ecmaVersion: 'latest'
-  }
+  "rules": {
+    "vue/max-attributes-per-line": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
 }
