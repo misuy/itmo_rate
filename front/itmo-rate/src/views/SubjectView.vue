@@ -1,6 +1,7 @@
 <script lang="ts">
 import ChipComponent from "@/components/ChipComponent.vue";
 import RatingCircle from "@/components/RatingCircle.vue";
+import RatingAndReviewCircle from '@/components/RatingAndReviewCircle.vue'
 import CommonButton from "@/components/CommonButton.vue";
 import ListHeader from "@/components/ListHeader.vue";
 import ReviewCard from "@/components/ReviewCard.vue";
@@ -8,7 +9,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "SubjectView",
-  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, ReviewCard},
+  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, ReviewCard, RatingAndReviewCircle},
   data() {
     return {
       lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
@@ -62,11 +63,8 @@ export default defineComponent({
               </div>
             </div>
             <div class="subject-info-right">
-              <RatingCircle :rating="6.5" :radius="100" />
-              <CommonButton style="font-size: 20px; height: 40px; width: 260px">
-                <template #text>
-                  Добавить отзыв 
-                </template>
+              <RatingAndReviewCircle :rating="10" style="width: 200px; height: 200px;" />
+              <CommonButton text="Добавить отзыв" :icon="true" style="font-size: 20px; height: 35px; width: 260px;">
                 <template #icon>
                   <img src="../assets/icons/PlusIcon.svg">
                 </template>
@@ -158,14 +156,18 @@ h3 {
   background: var(--background-blue-color);
 }
 
-.reviews-block {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  columns: 2 auto;
-  /* column-width: auto; */
-  gap: 25px;
-  margin-top: 45px;
-  /* justify-content: center; */
+@media screen and (max-width: 1300px) {
+  .reviews-block {
+    columns: 1 auto;
+    margin-top: 45px;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .reviews-block {
+    columns: 2 auto;
+    margin-top: 45px;
+  }
 }
 
 .content {
@@ -180,16 +182,16 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 3em;
+  gap: 80px;
 }
 
 .subject-info-block {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
   gap: 10px;
   justify-content: space-between;
-  max-width: 760px
+  /* max-width: 760px */
+  width: auto;
 }
 
 .subject-info-right {

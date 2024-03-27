@@ -1,15 +1,22 @@
 <script lang="ts">
 export default {
-  name: "CommonButton"
+  name: "CommonButton",
+  props: {
+    text: String,
+    icon: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
 <template>
   <div class="button">
     <span>
-      <slot name="text" />
+      {{ text }}
     </span>
-    <div class="icon">
+    <div v-if="icon" class="icon">
       <slot name="icon" />
     </div>
   </div>
@@ -22,10 +29,18 @@ export default {
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  border-radius: 10px;
+  border-radius: 12px;
   gap: 10px;
-  padding: 10px 20px;
-  background: var(--text-color-2);
+  padding: 12px 20px;
+  background: var(--btn-color);
+  transition: background .3s;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.button:hover {
+  background: var(--btn-hover-color);
+  transition: background .3s;
 }
 
 .button span {
@@ -34,8 +49,9 @@ export default {
   max-lines: 1;
 }
 
-.button :hover {
+.button:hover *{
   opacity: 0.9;
+  transition: opacity .3s;
 }
 
 .icon {

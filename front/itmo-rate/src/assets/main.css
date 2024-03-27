@@ -14,6 +14,9 @@
   --text-color: #25272B;
   --text-yellow-color: #7B6A2A;
   --text-blue-color: #345B94;
+
+  --btn-color: #656D7C;
+  --btn-hover-color: #515968;
 }
 
 html {
