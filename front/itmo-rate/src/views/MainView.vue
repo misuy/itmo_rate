@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LeftPanelView from './LeftPanelView.vue';
-import SubjectView from './SubjectView.vue';
+import LeftPanelView from '@/views/LeftPanelView.vue';
+import TeacherView from '@/views/TeacherView.vue';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import SubjectView from './SubjectView.vue';
     <LeftPanelView />
     <div class="main-content">
       <!-- <RouterView /> -->
-      <SubjectView />
+      <TeacherView />
     </div>
   </div>
 </template>
