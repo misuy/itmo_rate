@@ -1,6 +1,6 @@
 ## GET
 ### api/user
-```json
+```js
 {
 	name: "...",
 	role: 'unauthorized' | 'user' | 'admin',
@@ -9,7 +9,7 @@
 ```
 ### api/search?type=x&text=s
 Возвращает не более 20 наиболее релевантных результатов.
-```json
+```js
 // Указывает, где производить поиск - среди учителей, предметов, или и тех и тех
 // если поиск по категории не осуществлялся - соответствующий массив вернется пустым
 // type = 'techers' | 'subjects' | 'both'
@@ -34,7 +34,7 @@
 }
 ```
 ### api/teachers?offeset=x&amount=y
-```json
+```js
 [
 	{
 		name: "...",
@@ -45,7 +45,7 @@
 ]
 ```
 ### api/subjects?offeset=x&amount=y
-```json
+```js
 [
 	{
 		name: "...",
@@ -55,7 +55,7 @@
 ]
 ```
 ### api/subject/*'id'*
-```json
+```js
 {
 	id: 1,
 	faculties: ["1", "2"],
@@ -71,7 +71,7 @@
 }
 ```
 ### api/teacher/*'id'*
-```json
+```js
 {
 	id: 1,
 	avatar: "path/to/image",
@@ -86,7 +86,7 @@
 }
 ```
 ### api/subject/*'id'*/reviews?offset=x&amount=y
-```json
+```js
 [
 	{
 		id: 1,
@@ -98,7 +98,7 @@
 ]
 ```
 ### api/teacher/*'id'*/reviews?offset=*x*&amount=*y*
-```json
+```js
 [
 	{
 		avg_rating: 6.6,
@@ -109,7 +109,7 @@
 ]
 ```
 ### api/review/*'id'*/
-```json
+```js
 {
 	id: 1,
 	lecturer: "...",
@@ -132,7 +132,7 @@
 ## POST
 ### api/review
 **request**
-```json
+```js
 {
 	lecturer_id: 1,
 	teacher_id: 1,
