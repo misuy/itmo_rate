@@ -37,6 +37,7 @@
 ```js
 [
 	{
+	    id: 1,
 		name: "...",
 		tags: ["1", "2"..],
 		score: 9.1
@@ -48,6 +49,7 @@
 ```js
 [
 	{
+	    id: 1,
 		name: "...",
 		tags: ["1", "2"..],
 		score: 9.1
@@ -101,6 +103,7 @@
 ```js
 [
 	{
+	    id: 1,
 		avg_rating: 6.6,
 		text: "...",         // only preview (first x symbols)
 		created: "10.02.2023",
