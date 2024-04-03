@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import type { TeacherPreview } from '@/api/teachers';
 import ListHeader from './ListHeader.vue';
 import RatedListItem from './RatedListItem.vue';
-import RatedListItemInfo from '@/classes/RatedListClassesInfo';
+import type { PropType } from 'vue';
+
+interface Info {
+  score: number;
+  name: string;
+  tags: string[];
+}
 
 defineProps({
     name: String,
-    items: Array<RatedListItemInfo>,
+    items: Object as PropType<Info[]>,
 })
 </script>
 

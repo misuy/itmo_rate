@@ -1,17 +1,22 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, type PropType } from 'vue';
 import RatingCircle from './RatingCircle.vue';
 import ChipComponent from "@/components/ChipComponent.vue";
-import RatedListItemInfo from '@/classes/RatedListClassesInfo';
+
+interface Info {
+  score: number;
+  name: string;
+  tags: string[];
+}
 
 const props = defineProps({
-    info: RatedListItemInfo,
+    info: Object as PropType<Info>,
 })
 </script>
 
 <template>
   <div class="rated-list-item">
-    <RatingCircle :rating="props.info?.rating" :radius="18" />
+    <RatingCircle :rating="props.info?.score" :radius="18" />
 
     <div class="rated-list-item-info-box">
       <div class="rated-list-item-name">

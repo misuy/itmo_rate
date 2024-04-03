@@ -1,21 +1,39 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import OutlineButton from "@/components/OutlineButton.vue"
+
+export default defineComponent ({
+  name: "UserBox",
+  components: {OutlineButton},
+  props: {
+    authorized: Boolean,
+    firstName: String,
+    secondName: String
+  }
+})
+
+</script>
 
 <template>
-  <div class="user-box">
-    <div class="user-info-box">
-      <img class="user-img" src="../assets/icons/UserIcon.svg">
-      <div class="user-name">
-        <div class="user-name-surname">
-          Ненов
-        </div>
-        <div class="user-name-name">
-          Владислав
+  <div v-if="authorized">
+    <div class="user-box">
+      <div class="user-info-box">
+        <img class="user-img" src="../assets/icons/UserIcon.svg">
+        <div class="user-name">
+          <div class="user-name-surname">
+            {{ firstName }}
+          </div>
+          <div class="user-name-name">
+            {{ secondName }}
+          </div>
         </div>
       </div>
+      <OutlineButton style="width: 78%;" text="Выйти" />
     </div>
-    <button class="user-exit-btn">
-      Выйти
-    </button>
+  </div>
+  <div v-else>
+    <OutlineButton style="width: 78%; margin-bottom: 15px" text="Вход" />
+    <OutlineButton style="width: 78%;" text="Регистрация" />
   </div>
 </template>
 
@@ -33,6 +51,7 @@
   display: flex;
   align-items: center;
   height: 40px;
+  margin-bottom: 20px;
 }
 
 .user-img {

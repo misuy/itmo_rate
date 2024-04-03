@@ -6,7 +6,7 @@ export default {
     color: {
       type: String,
       default: "yellow",
-      validator: (value) => ["yellow", "blue"].includes(value)
+      validator: (value: string) => ["yellow", "blue"].includes(value)
     }
   },
   computed: {

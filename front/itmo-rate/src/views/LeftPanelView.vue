@@ -12,7 +12,7 @@ import UserBox from '@/components/UserBox.vue'
     </div>
 
     <div class="user-box-holder">
-      <UserBox />
+      <UserBox first-name="123" second-name="321" />
     </div>
   </div>
 </template>
