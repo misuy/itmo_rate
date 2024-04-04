@@ -17,3 +17,11 @@ func Filter[T any](data []T, f func(T) bool) []T {
 	}
 	return ret
 }
+
+func Mean(data []float32) float32 {
+	sum := float32(0)
+	for _, el := range data {
+		sum += el
+	}
+	return sum / float32(len(data))
+}
