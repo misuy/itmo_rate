@@ -6,12 +6,8 @@ import type { TeacherReview } from "@/api/reviews"
 import type { SubjectPreview } from "@/api/subjects"
 import { emptyTeacher } from "@/utils"
 
-interface Preview {
-  name: string;
-  rating: number;
-}
-
 interface State {
+  error: number;
   teachers: TeacherPreview[];
   subjects: SubjectPreview[];
   currentTeacher: Teacher;
@@ -22,6 +18,7 @@ interface State {
 export default createStore({
   state () : State {
     return {
+      error: NaN,
       teachers: [],
       subjects: [],
       teacherReviews: [],

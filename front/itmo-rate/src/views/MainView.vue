@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import LeftPanelView from '@/views/LeftPanelView.vue';
+import ErrorView from '@/views/ErrorView.vue';
 </script>
 
 <template>
   <div class="main-view">
     <LeftPanelView />
     <div class="main-content">
-      <RouterView />
-    </div>
+      <RouterView v-if="!$store.state.error" />
+      <ErrorView v-else />
+    </div> 
   </div>
 </template>
 

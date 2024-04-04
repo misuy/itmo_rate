@@ -190,8 +190,8 @@ h3 {
 .avg-rating-container {
   display: flex;
   flex-flow: row wrap;
-  gap: 10px 20px;
-  /* max-width: 350px; */
+  gap: 12px 20px;
+  max-width: 550px;
 }
 
 .avg-rating {

@@ -15,5 +15,8 @@ export default {
   },
   gotSubjects(state: State, subjects: SubjectPreview[]) {
     state.subjects = subjects;
+  },
+  setError(state: State, code: number) {
+    state.error = code;
   }
 }

@@ -22,9 +22,9 @@ export default {
     commit("gotTeacher", emptyTeacher());
     const result = await fetchTeacher(id);
     if (result.ok) {
-      commit("gotTeacher", result.payload!)
+      commit("gotTeacher", result.payload!);
     } else {
-      // error!
+      commit("setError", result.code);
     }
   },
   async getTeacherReviews ({ commit, state } : Params, {id, offset, amount} : any) {
@@ -33,7 +33,7 @@ export default {
     if (result.ok) {
       commit("gotTeacherReviews", result.payload!)
     } else {
-      // error!
+      commit("setError", result.code);
     }
   },
   async getSubjects ({ commit, state } : Params, { offset, amount } : any) {
@@ -41,7 +41,7 @@ export default {
     if (result.ok) {
       commit("gotSubjects", result.payload!)
     } else {
-      // error!
+      commit("setError", result.code);
     }
   }
 }

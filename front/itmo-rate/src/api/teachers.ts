@@ -20,6 +20,7 @@ interface TeacherPreview {
 
 async function fetchTeacher(id: number) : Promise<ApiResult<Teacher>>  {
   await sleep(500);
+  // return ApiResult.error("", 500);
   return ApiResult.ok({
     id: id,
     name: "Клименков Сергей Викторович",
