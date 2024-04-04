@@ -26,18 +26,18 @@ type Subject struct {
 	Id        int
 	Name      string
 	Faculties []string
+	Lecturers []string
+	Teachers  []string
 	Criteria  []Criteria
 	AvgRating float32
-	Lecturers []int
-	Teachers  []int
 }
 
 type Teacher struct {
 	Id        int
 	Name      string
 	Avatar    string
+	Subjects  []string
 	Criteria  []Criteria
-	Subjects  []int
 	AvgRating float32
 }
 
@@ -51,13 +51,13 @@ type ShortObject struct {
 var criteria Criteria = Criteria{"Unknown", 2}
 
 var subjects []Subject = []Subject{
-	{0, "ТПО", []string{"ВТ", "ФПИиКТ"}, []Criteria{criteria, criteria, criteria, criteria}, 2.3, []int{0}, []int{0, 1}},
-	{1, "ОПД", []string{"ВТ", "ФПИиКТ"}, []Criteria{criteria, criteria, criteria, criteria}, 8.9, []int{1}, []int{1}},
+	{0, "ТПО", []string{"ВТ", "ФПИиКТ"}, []string{"Клименков Сергей Викторович"}, []string{"Клименков Сергей Викторович", "Соснов Николай Федорович"}, []Criteria{criteria, criteria, criteria, criteria}, 2.3},
+	{1, "ОПД", []string{"ВТ", "ФПИиКТ"}, []string{"Клименков Сергей Викторович"}, []string{"Клименков Сергей Викторович"}, []Criteria{criteria, criteria, criteria, criteria}, 8.9},
 }
 
 var teachers []Teacher = []Teacher{
-	{0, "Клименков Сергей Викторович", "path/to/image", []Criteria{criteria, criteria, criteria, criteria}, []int{0, 1}, 7.7},
-	{1, "Соснов Николай Федорович", "path/to/image", []Criteria{criteria, criteria, criteria, criteria}, []int{0, 1}, 5.6},
+	{0, "Клименков Сергей Викторович", "path/to/image", []string{"ТПО", "ОПД"}, []Criteria{criteria, criteria, criteria, criteria}, 7.7},
+	{1, "Соснов Николай Федорович", "path/to/image", []string{"ТПО"}, []Criteria{criteria, criteria, criteria, criteria}, 5.6},
 }
 
 func subjectToShortObject(subject Subject) ShortObject {
@@ -68,11 +68,7 @@ func teacherToShortObject(teacher Teacher) ShortObject {
 	return ShortObject{
 		teacher.Id,
 		teacher.Name,
-		util.Map(teacher.Subjects, func(i int) string {
-			return util.Filter(subjects, func(subject Subject) bool {
-				return subject.Id == i
-			})[0].Name
-		}),
+		teacher.Subjects,
 		teacher.AvgRating,
 	}
 }
