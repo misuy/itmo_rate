@@ -1,4 +1,4 @@
-import { Store } from '@/store';// path to store file
+import Store from "@/store/index"
 
 declare module "vuex" {
   export * from "vuex/types/index.d.ts";

@@ -2,8 +2,19 @@
 import RatingCircle from "@/components/RatingCircle.vue";
 import ListHeader from "@/components/ListHeader.vue";
 import TeacherReviewCard from "@/components/TeacherReviewCard.vue";
+import { useStore } from "vuex";
+import { useRoute, useRouter } from "vue-router";
 
-const classes = ["Основые проектной деятельности", "Тестирование программного обеспечения", "Операционные системы"];
+const store = useStore();
+const route = useRoute();
+
+const id = Number(route.params.id);
+if (isNaN(id)) {
+  // error
+} else {
+  store.dispatch("getTeacher", id);
+  store.dispatch("getTeacherReviews", {id, offset: 0, amount: 10});
+}
 
 </script>
 
@@ -14,7 +25,7 @@ const classes = ["Основые проектной деятельности", "
         <h2 class="prefix-h" @click="$router.back()">
           Преподаватели \ 
         </h2>
-        <h2>Клименков Сергей Викторович</h2>
+        <h2> {{ $store.state.currentTeacher.name }}</h2>
         <div class="h-line" />
       </div>
       <div class="page-content">
@@ -22,29 +33,13 @@ const classes = ["Основые проектной деятельности", "
           <div class="subject-info-block">
             <div>
               <div class="subject-info-left">
-                <img class="teacher-avatar" src="https://photo.itmo.su/avatar/8864a7e8b3d285daa5e12eec5ab6a82c782b2804/cover/320/320/">
+                <img class="teacher-avatar" :src="$store.state.currentTeacher.avatar">
                 <div>
                   <h3>Оценки</h3>
                   <div class="avg-rating-container">
-                    <div class="avg-rating">
-                      <RatingCircle :rating="4.5" />
-                      <span>Критерий 1</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="7.5" />
-                      <span>Критерий 2</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="9" />
-                      <span>Критерий 3</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="1.5" />
-                      <span>Критерий 4</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="4.5" />
-                      <span>Критерий 5</span>
+                    <div v-for="cr in $store.state.currentTeacher.criteria" :key="cr.name" class="avg-rating">
+                      <RatingCircle :rating="cr.rating" />
+                      <span>{{ cr.name }}</span>
                     </div>
                   </div>
                 </div>
@@ -52,18 +47,18 @@ const classes = ["Основые проектной деятельности", "
             </div>
           </div>
           <div class="reviews-block">
-            <TeacherReviewCard />
-            <TeacherReviewCard />
-            <TeacherReviewCard />
-            <TeacherReviewCard />
+            <TeacherReviewCard
+              v-for="rev in $store.state.teacherReviews" :key="rev.id"
+              :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating"
+            />
           </div>
         </div>
         <div class="side-column">
           <div class="classes-block yellow">
-            <ListHeader name="Предметы" :count="classes.length" :font-size="20" />
+            <ListHeader name="Предметы" :count="$store.state.currentTeacher.subjects.length" :font-size="20" />
             <ul>
-              <li v-for="cls in classes" :key="cls"> 
-                {{ cls }}
+              <li v-for="subj in $store.state.currentTeacher.subjects" :key="subj"> 
+                {{ subj }}
               </li>
             </ul>
           </div>

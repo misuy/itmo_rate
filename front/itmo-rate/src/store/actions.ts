@@ -1,6 +1,8 @@
 import type { State } from ".";
-import { fetchTeachersList } from "@/api/teachers"
+import { fetchTeachersList, fetchTeacher} from "@/api/teachers"
 import { fetchSubjectsList } from "@/api/subjects";
+import { emptyTeacher } from "@/utils";
+import { fetchTeacherReviews } from "@/api/reviews";
 
 interface Params {
   commit: any;
@@ -12,6 +14,24 @@ export default {
     const result = await fetchTeachersList(offset, amount)
     if (result.ok) {
       commit("gotTeachers", result.payload!)
+    } else {
+      // error!
+    }
+  },
+  async getTeacher ({ commit, state } : Params, id: number) {
+    commit("gotTeacher", emptyTeacher());
+    const result = await fetchTeacher(id);
+    if (result.ok) {
+      commit("gotTeacher", result.payload!)
+    } else {
+      // error!
+    }
+  },
+  async getTeacherReviews ({ commit, state } : Params, {id, offset, amount} : any) {
+    commit("gotTeacherReviews", []);
+    const result = await fetchTeacherReviews(id, offset, amount);
+    if (result.ok) {
+      commit("gotTeacherReviews", result.payload!)
     } else {
       // error!
     }

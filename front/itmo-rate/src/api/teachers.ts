@@ -4,9 +4,10 @@ import type { Criterion } from ".";
 
 interface Teacher {
   id: number;
+  name: string;
   avatar: string;
-	creteria: Criterion[];
-	avg_rating: number;
+	criteria: Criterion[];
+	avgRating: number;
 	subjects: string[];
 }
 
@@ -15,6 +16,39 @@ interface TeacherPreview {
   name: string;
   tags: string[];
   score: number;
+}
+
+async function fetchTeacher(id: number) : Promise<ApiResult<Teacher>>  {
+  await sleep(500);
+  return ApiResult.ok({
+    id: id,
+    name: "Клименков Сергей Викторович",
+    avatar: "https://photo.itmo.su/avatar/8864a7e8b3d285daa5e12eec5ab6a82c782b2804/cover/320/320/",
+    criteria: [
+      {
+        name: "Критерий 1",
+        rating: 5.7
+      },
+      {
+        name: "Критерий 2",
+        rating: 5.7
+      },
+      {
+        name: "Критерий 3",
+        rating: 8.2
+      },
+      {
+        name: "Критерий 4",
+        rating: 1.4
+      },
+      {
+        name: "Критерий 5",
+        rating: 4.4
+      },
+    ],
+    avgRating: 5.7,
+    subjects: ["Основые проектной деятельности"]
+  })
 }
 
 async function fetchTeachersList(offset: number, amount: number) 
@@ -36,5 +70,5 @@ async function fetchTeachersList(offset: number, amount: number)
   ])
 }
 
-export {fetchTeachersList}
+export {fetchTeachersList, fetchTeacher}
 export type {Teacher, TeacherPreview}

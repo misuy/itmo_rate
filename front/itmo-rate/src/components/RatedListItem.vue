@@ -3,6 +3,7 @@ import { defineProps, type PropType } from 'vue';
 import RatingCircle from './RatingCircle.vue';
 import ChipComponent from "@/components/ChipComponent.vue";
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 interface Info {
   id: number;
