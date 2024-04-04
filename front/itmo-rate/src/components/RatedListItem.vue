@@ -2,20 +2,33 @@
 import { defineProps, type PropType } from 'vue';
 import RatingCircle from './RatingCircle.vue';
 import ChipComponent from "@/components/ChipComponent.vue";
+import { useRouter } from 'vue-router';
 
 interface Info {
+  id: number;
   score: number;
   name: string;
   tags: string[];
 }
 
 const props = defineProps({
-    info: Object as PropType<Info>,
-})
+  pathPrefix: {
+    type: String,
+    default: "/"
+  },
+  info: Object as PropType<Info>,
+});
+const router = useRouter();
+console.log(props.pathPrefix);
+
+function openItemPage() {
+  router.push(props.pathPrefix + props.info?.id);
+}
+
 </script>
 
 <template>
-  <div class="rated-list-item">
+  <div @click="openItemPage()" class="rated-list-item">
     <RatingCircle :rating="props.info?.score" :radius="18" />
 
     <div class="rated-list-item-info-box">
@@ -38,10 +51,18 @@ const props = defineProps({
 .rated-list-item {
     display: flex;
     align-items: center;
-    margin-top: 10px;
     margin-bottom: 0px;
     gap: 15px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    transition: .2s box-shadow;
 }
+
+.rated-list-item:hover {
+  box-shadow: 0px 3px 10px 2px #f1f1f3;
+  transition: .2s box-shadow;
+ }
 
 .rated-list-item-info-box {
     display: flex;

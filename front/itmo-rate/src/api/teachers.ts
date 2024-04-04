@@ -1,9 +1,6 @@
-import { ApiResult, sleep } from "@/utils";
-
-interface Criterion {
-  name: string;
-  rating: number;
-}
+import { sleep } from "@/utils";
+import { ApiResult } from ".";
+import type { Criterion } from ".";
 
 interface Teacher {
   id: number;

@@ -19,8 +19,11 @@ import LeftPanelView from '@/views/LeftPanelView.vue';
 }
 
 .main-content {
-    width: 100%;
-    height: 100%;
-    margin-left: 220px;
+  width: 100%;
+  height: 100%;
+  padding-left: 220px;
+  margin-top: 30px;
+  margin-left: 3em;
+  margin-right: 3em;
 }
 </style>

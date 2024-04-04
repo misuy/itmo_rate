@@ -62,7 +62,7 @@ h4 {
   font-weight: 500;
   color: var(--text-color);
   margin: 0;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
 
 span {
@@ -77,8 +77,8 @@ span {
 }
 
 .rating-container {
-  width: 67px;
-  height: 73px;
+  width: 57px;
+  height: 63px;
   background-color: #77dd69;
   border-radius: 10px 0px 0px 10px;
   display: flex;

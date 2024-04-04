@@ -1,29 +1,22 @@
-<script lang="ts">
+<script setup lang="ts">
 import ChipComponent from "@/components/ChipComponent.vue";
 import RatingCircle from "@/components/RatingCircle.vue";
 import RatingAndReviewCircle from '@/components/RatingAndReviewCircle.vue'
 import CommonButton from "@/components/CommonButton.vue";
 import ListHeader from "@/components/ListHeader.vue";
 import ReviewCard from "@/components/ReviewCard.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "SubjectView",
-  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, ReviewCard, RatingAndReviewCircle},
-  data() {
-    return {
-      lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
-      teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"]
-    }
-  }
-})
+
+const lecturers = ["Клименков Сергей Викторович", "Соснов Николай Федорович"];
+const teachers = ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"];
+
 </script>
 
 <template>
   <div class="home-view">
     <div class="content">
       <div class="page-header">
-        <h2 class="prefix-h">
+        <h2 class="prefix-h" @click="$router.back()">
           Предметы \ 
         </h2>
         <h2>Основы проектной деятельности</h2>
@@ -64,7 +57,7 @@ export default defineComponent({
             </div>
             <div class="subject-info-right">
               <RatingAndReviewCircle :rating="10" style="width: 200px; height: 200px;" />
-              <CommonButton text="Добавить отзыв" :icon="true" style="font-size: 20px; height: 35px; width: 260px;">
+              <CommonButton text="Добавить отзыв" :icon="true" style="font-size: 18px; height: 35px; width: 260px;">
                 <template #icon>
                   <img src="../assets/icons/PlusIcon.svg">
                 </template>
@@ -104,7 +97,7 @@ export default defineComponent({
 <style scoped>
 
 h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -116,10 +109,11 @@ h2 {
 
 h2.prefix-h {
   color: var(--strokes-color);
+  cursor: pointer;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 22px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -173,9 +167,6 @@ h3 {
 .content {
   /*border: solid red 2px;*/
   width: 100%;
-  margin-top: 30px;
-  margin-left: 3em;
-  margin-right: 3em;
 }
 
 .page-content {
@@ -214,7 +205,7 @@ h3 {
 .avg-rating-container {
   display: flex;
   flex-flow: row wrap;
-  gap: 10px 25px;
+  gap: 10px 20px;
   /* max-width: 350px; */
 }
 

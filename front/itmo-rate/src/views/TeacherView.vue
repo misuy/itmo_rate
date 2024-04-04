@@ -1,27 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
 import RatingCircle from "@/components/RatingCircle.vue";
 import ListHeader from "@/components/ListHeader.vue";
-import { defineComponent } from "vue";
 import TeacherReviewCard from "@/components/TeacherReviewCard.vue";
 
-export default defineComponent({
-  name: "TeacherView",
-  components: {ListHeader, RatingCircle, TeacherReviewCard},
-  data() {
-    return {
-      lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
-      teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"],
-      classes: ["Основые проектной деятельности", "Тестирование программного обеспечения", "Операционные системы"]
-    }
-  }
-})
+const classes = ["Основые проектной деятельности", "Тестирование программного обеспечения", "Операционные системы"];
+
 </script>
 
 <template>
   <div class="home-view">
     <div class="content">
       <div class="page-header">
-        <h2 class="prefix-h">
+        <h2 class="prefix-h" @click="$router.back()">
           Преподаватели \ 
         </h2>
         <h2>Клименков Сергей Викторович</h2>
@@ -86,7 +76,7 @@ export default defineComponent({
 <style scoped>
 
 h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -98,10 +88,11 @@ h2 {
 
 h2.prefix-h {
   color: var(--strokes-color);
+  cursor: pointer;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 20px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -153,10 +144,10 @@ h3 {
 
 .content {
   /*border: solid red 2px;*/
-  width: 100%;
+  /* width: 100%;
   margin-top: 30px;
   margin-left: 3em;
-  margin-right: 3em;
+  margin-right: 3em; */
 }
 
 .page-content {
@@ -204,7 +195,7 @@ h3 {
 .avg-rating-container {
   display: flex;
   flex-flow: row wrap;
-  gap: 10px 25px;
+  gap: 10px 20px;
   /* max-width: 350px; */
 }
 

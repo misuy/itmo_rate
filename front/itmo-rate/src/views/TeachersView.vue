@@ -3,10 +3,10 @@ import RatedList from '@/components/RatedList.vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
-store.dispatch("gotTeachers", {
+store.dispatch("getTeachers", {
   offset: 0,
   amount: 10
-})
+});
 
 </script>
 
@@ -14,7 +14,7 @@ store.dispatch("gotTeachers", {
   <div class="teachers-view">
     <div class="teachers-view-content">
       <div class="teachers-list">
-        <RatedList :name="'Преподаватели'" :items="$store.state.teachers" />
+        <RatedList :name="'Преподаватели'" :items="$store.state.teachers" path-prefix="teacher/" />
       </div>
     </div>
   </div>
@@ -36,7 +36,9 @@ store.dispatch("gotTeachers", {
   }
   
   .teachers-list {
-    margin-top: 50px;
-    width: 85%;
+    width: 100%;
+    /* margin-top: 30px;
+    margin-left: 3em;
+    margin-right: 3em; */
   }
 </style>

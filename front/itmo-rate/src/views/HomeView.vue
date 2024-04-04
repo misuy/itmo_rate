@@ -21,10 +21,10 @@ const relatedTeachers = computed(() => testTeachers.filter((item) => item.name.t
         <HomeSearchBar @input-changed="(input) => substr=input" />
       </div>
       <div class="subjects-list">
-        <RatedList :name="'Предметы'" :items="relatedSubjects" />
+        <RatedList :name="'Предметы'" :items="relatedSubjects" path-prefix="subject/" />
       </div>
       <div class="teachers-list">
-        <RatedList :name="'Преподаватели'" :items="relatedTeachers" />
+        <RatedList :name="'Преподаватели'" :items="relatedTeachers" path-prefix="teacher/" />
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@ const relatedTeachers = computed(() => testTeachers.filter((item) => item.name.t
 .itmo-rate-logo {
   width: auto;
   height: 80px;
-  margin-top: 88px;
+  margin-top: 48px;
 }
 
 .home-search-bar-holder {
