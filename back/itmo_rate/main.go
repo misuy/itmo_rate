@@ -9,6 +9,8 @@ import (
 
 	"strings"
 
+	"itmo_rate/db"
+	"itmo_rate/db/entities"
 	"itmo_rate/util"
 
 	"time"
@@ -400,18 +402,38 @@ func reviewEndpoint(ctx *gin.Context) {
 }
 
 func main() {
-	router := gin.Default()
+	/*
+		router := gin.Default()
 
-	api := router.Group("/api")
-	api.GET("/user", userEndpoint)
-	api.GET("/search", searchEndpoint)
-	api.GET("/teachers", teachersEndpoint)
-	api.GET("/subjects", subjectsEndpoint)
-	api.GET("/subject/:id", subjectEndpoint)
-	api.GET("/teacher/:id", teacherEndpoint)
-	api.GET("/subject/:id/reviews", subjectReviewsEndpoint)
-	api.GET("/teacher/:id/reviews", teacherReviewsEndpoint)
-	api.GET("/review/:id", reviewEndpoint)
+		api := router.Group("/api")
+		api.GET("/user", userEndpoint)
+		api.GET("/search", searchEndpoint)
+		api.GET("/teachers", teachersEndpoint)
+		api.GET("/subjects", subjectsEndpoint)
+		api.GET("/subject/:id", subjectEndpoint)
+		api.GET("/teacher/:id", teacherEndpoint)
+		api.GET("/subject/:id/reviews", subjectReviewsEndpoint)
+		api.GET("/teacher/:id/reviews", teacherReviewsEndpoint)
+		api.GET("/review/:id", reviewEndpoint)
 
-	router.Run(":8888")
+		router.Run(":8888")
+	*/
+	db, err := db.Open()
+	if err != nil {
+		return
+	}
+
+	criteriaList := entities.CriteriaList{List: []entities.Criteria{
+		{Name: "111", Value: 0.1},
+		{Name: "222", Value: 0.2},
+	},
+	}
+
+	db.AutoMigrate(&entities.CriteriaList{}, &entities.Criteria{})
+
+	faculties := []entities.Faculty{{Name: "ФПИиКТ"}}
+
+	subjects := []entities.Subject{{}}
+
+	db.Create(&criteriaList)
 }
