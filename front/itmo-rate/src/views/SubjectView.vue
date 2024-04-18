@@ -1,32 +1,34 @@
-<script lang="ts">
+<script setup lang="ts">
 import ChipComponent from "@/components/ChipComponent.vue";
 import RatingCircle from "@/components/RatingCircle.vue";
 import RatingAndReviewCircle from '@/components/RatingAndReviewCircle.vue'
 import CommonButton from "@/components/CommonButton.vue";
 import ListHeader from "@/components/ListHeader.vue";
 import ReviewCard from "@/components/ReviewCard.vue";
-import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
-export default defineComponent({
-  name: "SubjectView",
-  components: {ListHeader, CommonButton, RatingCircle, ChipComponent, ReviewCard, RatingAndReviewCircle},
-  data() {
-    return {
-      lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
-      teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"]
-    }
-  }
-})
+const store = useStore();
+const route = useRoute();
+
+const id = Number(route.params.id);
+if (id) {
+  store.dispatch("getSubject", id);
+  store.dispatch("getSubjectReviews", {id, offset: 0, amount: 10});
+} else {
+  store.state.error = 404;
+}
+
 </script>
 
 <template>
   <div class="home-view">
     <div class="content">
       <div class="page-header">
-        <h2 class="prefix-h">
+        <h2 class="prefix-h" @click="$router.back()">
           Предметы \ 
         </h2>
-        <h2>Основы проектной деятельности</h2>
+        <h2>{{ $store.state.currentSubject.name }}</h2>
         <div class="h-line" />
       </div>
       <div class="page-content">
@@ -35,36 +37,23 @@ export default defineComponent({
             <div class="subject-info-left">
               <h3>Факультеты</h3>
               <div class="chip-container">
-                <ChipComponent text="ПИикт" color="yellow" />
-                <ChipComponent text="ВТ" color="blue" />
+                <ChipComponent 
+                  v-for="(tag, idx) in $store.state.currentSubject.faculties" :key="tag" 
+                  :text="tag" 
+                  :color="idx % 2 == 0 ? 'yellow' : 'blue'"
+                />
               </div>
               <h3>Оценки</h3>
               <div class="avg-rating-container">
-                <div class="avg-rating">
-                  <RatingCircle :rating="4.5" />
-                  <span>Критерий 1</span>
-                </div>
-                <div class="avg-rating">
-                  <RatingCircle :rating="7.5" />
-                  <span>Критерий 2</span>
-                </div>
-                <div class="avg-rating">
-                  <RatingCircle :rating="9" />
-                  <span>Критерий 3</span>
-                </div>
-                <div class="avg-rating">
-                  <RatingCircle :rating="1.5" />
-                  <span>Критерий 4</span>
-                </div>
-                <div class="avg-rating">
-                  <RatingCircle :rating="4.5" />
-                  <span>Критерий 5</span>
+                <div v-for="cr in $store.state.currentSubject.criteria" :key="cr.name" class="avg-rating">
+                  <RatingCircle :rating="cr.rating" />
+                  <span>{{ cr.name }}</span>
                 </div>
               </div>
             </div>
             <div class="subject-info-right">
-              <RatingAndReviewCircle :rating="10" style="width: 200px; height: 200px;" />
-              <CommonButton text="Добавить отзыв" :icon="true" style="font-size: 20px; height: 35px; width: 260px;">
+              <RatingAndReviewCircle :rating="$store.state.currentSubject.avgRating" style="width: 200px; height: 200px;" />
+              <CommonButton text="Добавить отзыв" :icon="true" style="font-size: 18px; height: 35px; width: 260px;">
                 <template #icon>
                   <img src="../assets/icons/PlusIcon.svg">
                 </template>
@@ -72,25 +61,25 @@ export default defineComponent({
             </div>
           </div>
           <div class="reviews-block">
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            <ReviewCard
+              v-for="card in $store.state.subjectReviews" :key="card.id"
+              :date="card.created" :text="card.text" :subject="card.subject" :rating="card.rating"
+            />
           </div>
         </div>
         <div class="side-column">
           <div class="teachers-block yellow">
-            <ListHeader name="Лекторы" :count="lecturers.length" :font-size="20" />
+            <ListHeader name="Лекторы" :count="$store.state.currentSubject.lecturers.length" :font-size="20" />
             <ul>
-              <li v-for="lecturer in lecturers" :key="lecturer"> 
+              <li v-for="lecturer in $store.state.currentSubject.lecturers" :key="lecturer"> 
                 {{ lecturer }}
               </li>
             </ul>
           </div>
           <div class="teachers-block blue">
-            <ListHeader name="Преподаватели" :count="teachers.length" :font-size="20" />
+            <ListHeader name="Преподаватели" :count="$store.state.currentSubject.length" :font-size="20" />
             <ul>
-              <li v-for="teacher in teachers" :key="teacher">
+              <li v-for="teacher in $store.state.currentSubject.teachers" :key="teacher">
                 {{ teacher }}
               </li>
             </ul>
@@ -104,7 +93,7 @@ export default defineComponent({
 <style scoped>
 
 h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -116,10 +105,11 @@ h2 {
 
 h2.prefix-h {
   color: var(--strokes-color);
+  cursor: pointer;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 22px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -173,9 +163,6 @@ h3 {
 .content {
   /*border: solid red 2px;*/
   width: 100%;
-  margin-top: 30px;
-  margin-left: 3em;
-  margin-right: 3em;
 }
 
 .page-content {
@@ -214,7 +201,7 @@ h3 {
 .avg-rating-container {
   display: flex;
   flex-flow: row wrap;
-  gap: 10px 25px;
+  gap: 10px 20px;
   /* max-width: 350px; */
 }
 

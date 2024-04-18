@@ -26,6 +26,16 @@ export default defineComponent({
   computed: {
     truncText() : string {
       return this.text.length > 373 ? this.text.substring(0, 373) + "..." : this.text;
+    },
+    computeColor() {
+      if (this.score <= 2.5)
+        return "#FF0000";
+      else if (this.score <= 5)
+        return "#E3B064";
+      else if (this.score <= 7.5)
+        return "#ABE364";
+      else
+        return "#85E364";
     }
   }
 })
@@ -34,7 +44,7 @@ export default defineComponent({
 <template>
   <div class="card-body">
     <div class="top-bar">
-      <div class="rating-container">
+      <div class="rating-container" :style="{background: computeColor}">
         {{ score }}
       </div>
       <div>
@@ -62,7 +72,7 @@ h4 {
   font-weight: 500;
   color: var(--text-color);
   margin: 0;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
 
 span {
@@ -77,9 +87,8 @@ span {
 }
 
 .rating-container {
-  width: 67px;
-  height: 73px;
-  background-color: #77dd69;
+  width: 57px;
+  height: 63px;
   border-radius: 10px 0px 0px 10px;
   display: flex;
   align-items: center;

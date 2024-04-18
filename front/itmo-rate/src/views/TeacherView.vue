@@ -1,30 +1,31 @@
-<script lang="ts">
+<script setup lang="ts">
 import RatingCircle from "@/components/RatingCircle.vue";
 import ListHeader from "@/components/ListHeader.vue";
-import { defineComponent } from "vue";
 import TeacherReviewCard from "@/components/TeacherReviewCard.vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
-export default defineComponent({
-  name: "TeacherView",
-  components: {ListHeader, RatingCircle, TeacherReviewCard},
-  data() {
-    return {
-      lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
-      teachers: ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"],
-      classes: ["Основые проектной деятельности", "Тестирование программного обеспечения", "Операционные системы"]
-    }
-  }
-})
+const store = useStore();
+const route = useRoute();
+
+const id = Number(route.params.id);
+if (id) {
+  store.dispatch("getTeacher", id);
+  store.dispatch("getTeacherReviews", {id, offset: 0, amount: 10});
+} else {
+  store.state.error = 404;
+}
+
 </script>
 
 <template>
   <div class="home-view">
     <div class="content">
       <div class="page-header">
-        <h2 class="prefix-h">
+        <h2 class="prefix-h" @click="$router.back()">
           Преподаватели \ 
         </h2>
-        <h2>Клименков Сергей Викторович</h2>
+        <h2> {{ $store.state.currentTeacher.name }}</h2>
         <div class="h-line" />
       </div>
       <div class="page-content">
@@ -32,29 +33,13 @@ export default defineComponent({
           <div class="subject-info-block">
             <div>
               <div class="subject-info-left">
-                <img class="teacher-avatar" src="https://photo.itmo.su/avatar/8864a7e8b3d285daa5e12eec5ab6a82c782b2804/cover/320/320/">
+                <img class="teacher-avatar" :src="$store.state.currentTeacher.avatar">
                 <div>
                   <h3>Оценки</h3>
                   <div class="avg-rating-container">
-                    <div class="avg-rating">
-                      <RatingCircle :rating="4.5" />
-                      <span>Критерий 1</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="7.5" />
-                      <span>Критерий 2</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="9" />
-                      <span>Критерий 3</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="1.5" />
-                      <span>Критерий 4</span>
-                    </div>
-                    <div class="avg-rating">
-                      <RatingCircle :rating="4.5" />
-                      <span>Критерий 5</span>
+                    <div v-for="cr in $store.state.currentTeacher.criteria" :key="cr.name" class="avg-rating">
+                      <RatingCircle :rating="cr.rating" />
+                      <span>{{ cr.name }}</span>
                     </div>
                   </div>
                 </div>
@@ -62,18 +47,18 @@ export default defineComponent({
             </div>
           </div>
           <div class="reviews-block">
-            <TeacherReviewCard />
-            <TeacherReviewCard />
-            <TeacherReviewCard />
-            <TeacherReviewCard />
+            <TeacherReviewCard
+              v-for="rev in $store.state.teacherReviews" :key="rev.id"
+              :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating"
+            />
           </div>
         </div>
         <div class="side-column">
           <div class="classes-block yellow">
-            <ListHeader name="Предметы" :count="classes.length" :font-size="20" />
+            <ListHeader name="Предметы" :count="$store.state.currentTeacher.subjects.length" :font-size="20" />
             <ul>
-              <li v-for="cls in classes" :key="cls"> 
-                {{ cls }}
+              <li v-for="subj in $store.state.currentTeacher.subjects" :key="subj"> 
+                {{ subj }}
               </li>
             </ul>
           </div>
@@ -86,7 +71,7 @@ export default defineComponent({
 <style scoped>
 
 h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -98,10 +83,11 @@ h2 {
 
 h2.prefix-h {
   color: var(--strokes-color);
+  cursor: pointer;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 20px;
   font-family: Inter,serif;
   font-weight: 600;
   color: var(--text-color);
@@ -153,10 +139,10 @@ h3 {
 
 .content {
   /*border: solid red 2px;*/
-  width: 100%;
+  /* width: 100%;
   margin-top: 30px;
   margin-left: 3em;
-  margin-right: 3em;
+  margin-right: 3em; */
 }
 
 .page-content {
@@ -204,8 +190,8 @@ h3 {
 .avg-rating-container {
   display: flex;
   flex-flow: row wrap;
-  gap: 10px 25px;
-  /* max-width: 350px; */
+  gap: 12px 20px;
+  max-width: 550px;
 }
 
 .avg-rating {

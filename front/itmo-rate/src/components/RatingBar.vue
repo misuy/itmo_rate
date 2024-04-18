@@ -28,7 +28,7 @@ export default {
   <div class="container">
     <div v-for="s in score" class="rating-rect">
       <div class="rating" :style="{background: computeColor(s)}">
-        <spa>{{ s }}</spa>
+        <span>{{ s }}</span>
       </div>
       <div class="char">
         A

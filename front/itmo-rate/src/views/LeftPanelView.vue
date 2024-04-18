@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import NavBox from '@/components/NavBox.vue'
 import UserBox from '@/components/UserBox.vue'
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+
+const route = useRoute();
+const store = useStore();
+watch(
+  () => route.fullPath,
+  () => { store.state.error = NaN; }
+);
+
 </script>
 
 <template>
@@ -12,14 +23,14 @@ import UserBox from '@/components/UserBox.vue'
     </div>
 
     <div class="user-box-holder">
-      <UserBox />
+      <UserBox first-name="123" second-name="321" />
     </div>
   </div>
 </template>
 
 <style>
 .left-panel {
-  background-color: #eff1f6;
+  background: var(--panel-background-color);
   display: flex;
   align-items: center;
   flex-direction: column;

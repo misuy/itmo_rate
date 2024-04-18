@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import RatedListItemInfo from '@/classes/RatedListClassesInfo';
 import RatedList from '@/components/RatedList.vue';
+import { useStore } from 'vuex';
 
-const testSubjects = [new RatedListItemInfo(6.8, 'Основы проектной деятельности', ['ПИиКТ', 'BT']), new RatedListItemInfo(2.8, 'ТПО', ['ПИиКТ', 'BT', 'Нейротех'])];
+const store = useStore();
+store.dispatch("getSubjects", {
+  offset: 0,
+  amount: 10
+});
 </script>
 
 <template>
   <div class="subjects-view">
     <div class="subjects-view-content">
       <div class="subjects-list">
-        <RatedList :name="'Предметы'" :items="testSubjects" />
+        <RatedList :name="'Предметы'" :items="$store.state.subjects" path-prefix="subject/" />
       </div>
     </div>
   </div>
@@ -31,8 +35,7 @@ const testSubjects = [new RatedListItemInfo(6.8, 'Основы проектно�
   }
   
   .subjects-list {
-    margin-top: 50px;
-    width: 85%;
+    width: 100%;
   }
 </style>
   

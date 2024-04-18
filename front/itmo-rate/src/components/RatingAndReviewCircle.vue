@@ -37,7 +37,7 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  font-size: 42px;
+  font-size: 36px;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
