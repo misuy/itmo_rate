@@ -1,21 +1,11 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
-
-	"strconv"
-
-	"strings"
-
-	"itmo_rate/db"
-	"itmo_rate/db/entities"
-	"itmo_rate/util"
-
-	"time"
+	"itmo_rate/DB"
+	"itmo_rate/DB/entities"
 )
 
+/*
 type User struct {
 	Name string
 	Role string
@@ -400,6 +390,7 @@ func reviewEndpoint(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, review)
 
 }
+*/
 
 func main() {
 	/*
@@ -418,22 +409,20 @@ func main() {
 
 		router.Run(":8888")
 	*/
-	db, err := db.Open()
+	db, err := DB.Open()
 	if err != nil {
 		return
 	}
 
-	criteriaList := entities.CriteriaList{List: []entities.Criteria{
-		{Name: "111", Value: 0.1},
-		{Name: "222", Value: 0.2},
-	},
-	}
+	//DB.SaveTestData(db)
 
-	db.AutoMigrate(&entities.CriteriaList{}, &entities.Criteria{})
-
-	faculties := []entities.Faculty{{Name: "ФПИиКТ"}}
-
-	subjects := []entities.Subject{{}}
-
-	db.Create(&criteriaList)
+	var teachers []entities.Teacher
+	var subjects []entities.Subject
+	var reviews []entities.Review
+	db.Model(&entities.Subject{}).Find(&subjects)
+	db.Model(&entities.Review{}).Find(&reviews)
+	println(len(reviews))
+	//println(subjects[0].Teachers[0].Name)
+	teachers, _ = reviews[0].GetTeachersByRole(db, "lecturer")
+	println(len(teachers))
 }
