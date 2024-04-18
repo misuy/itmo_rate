@@ -8,7 +8,7 @@ import (
 )
 
 func Open() (db *gorm.DB, err error) {
-	dsn := "host=localhost user=itmo_rate dbname=itmo_rate_db port=5432"
+	dsn := "host=localhost user=sample password=123456 dbname=course port=5432"
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return
@@ -28,7 +28,6 @@ func Open() (db *gorm.DB, err error) {
 
 	db.SetupJoinTable(&entities.Teacher{}, "Reviews", &entities.TeacherReviewRel{})
 	db.SetupJoinTable(&entities.Subject{}, "Teachers", &entities.SubjectTeacherRel{})
-
 	return
 }
 

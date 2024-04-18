@@ -7,6 +7,7 @@ store.dispatch("getSubjects", {
   offset: 0,
   amount: 10
 });
+console.log(store.state.subjects);
 </script>
 
 <template>

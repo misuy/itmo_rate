@@ -49,7 +49,7 @@ if (id) {
           <div class="reviews-block">
             <TeacherReviewCard
               v-for="rev in $store.state.teacherReviews" :key="rev.id"
-              :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating"
+              :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating[0]"
             />
           </div>
         </div>

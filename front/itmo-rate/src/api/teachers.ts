@@ -1,4 +1,4 @@
-import { sleep } from "@/utils";
+import { headers, sleep } from "@/utils";
 import { ApiResult } from ".";
 import type { Criterion } from ".";
 
@@ -19,56 +19,39 @@ interface TeacherPreview {
 }
 
 async function fetchTeacher(id: number) : Promise<ApiResult<Teacher>>  {
-  await sleep(500);
-  // return ApiResult.error("", 500);
-  return ApiResult.ok({
-    id: id,
-    name: "Клименков Сергей Викторович",
-    avatar: "https://photo.itmo.su/avatar/8864a7e8b3d285daa5e12eec5ab6a82c782b2804/cover/320/320/",
-    criteria: [
-      {
-        name: "Критерий 1",
-        rating: 5.7
-      },
-      {
-        name: "Критерий 2",
-        rating: 5.7
-      },
-      {
-        name: "Критерий 3",
-        rating: 8.2
-      },
-      {
-        name: "Критерий 4",
-        rating: 1.4
-      },
-      {
-        name: "Критерий 5",
-        rating: 4.4
-      },
-    ],
-    avgRating: 5.7,
-    subjects: ["Основые проектной деятельности"]
-  })
+  const url = `http://localhost:8888/api/teacher/${id}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    mode: "cors",
+    headers: headers,
+  }) 
+  if (response.ok) {
+    const s: Teacher = (await response.json()).teacher;
+    s.avatar = "https://photo.itmo.su/avatar/8864a7e8b3d285daa5e12eec5ab6a82c782b2804/cover/320/320/"
+    console.log(s);
+    return ApiResult.ok(s, response.status);
+  } else {
+    console.error("error " + await response.text());
+    return ApiResult.error("Cant get subjects list!", response.status);
+  }
 }
 
 async function fetchTeachersList(offset: number, amount: number) 
   : Promise<ApiResult<TeacherPreview[]>> {
-  await sleep(1000);
-  return ApiResult.ok([
-    {
-      id: 1,
-      name: "Соснов Николай Федорович",
-      tags: ["Методы криптографии", "ТПО", "Компьютерные сети"],
-      score: 4.4
-    },
-    {
-      id: 1,
-      name: "Соснов Семен Федорович",
-      tags: ["Методы криптографии", "ТПО", "Компьютерные сети"],
-      score: 7.2
+    const url = `http://localhost:8888/api/teachers?amount=${amount}&offset=${offset}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      mode: "cors",
+      headers: headers,
+    }) 
+    if (response.ok) {
+      const s: TeacherPreview[] = (await response.json()).teachers; 
+      console.log(s);
+      return ApiResult.ok(s, response.status);
+    } else {
+      console.error("error " + await response.text());
+      return ApiResult.error("Cant get subjects list!", response.status);
     }
-  ])
 }
 
 export {fetchTeachersList, fetchTeacher}

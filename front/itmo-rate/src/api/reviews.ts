@@ -1,4 +1,4 @@
-import { sleep } from "@/utils";
+import { headers, sleep } from "@/utils";
 import { ApiResult, type Criterion } from ".";
 
 interface TeacherReview {
@@ -30,29 +30,38 @@ interface FullReview {
 }
 
 async function fetchTeacherReviews(id: number, offset: number, amount: number): Promise<ApiResult<TeacherReview[]>> {
-  await sleep(1000);
-  const reviews: TeacherReview[] = [...Array(amount).keys()].map(x => ({
-    id: x,
-    rating: 1.2,
-    created: "10.03.2023",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat laboris, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...",
-    author: "Анонимно",
-    subject: "Предмет " + x
-  }));
-  return ApiResult.ok(reviews)
+  const url = `http://localhost:8888/api/teacher/${id}/reviews?amount=${amount}&offset=${offset}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    mode: "cors",
+    headers: headers,
+  }) 
+  if (response.ok) {
+    const s: TeacherReview[] = (await response.json()).reviews;
+    console.log(s);
+    return ApiResult.ok(s, response.status);
+  } else {
+    console.error("error " + await response.text());
+    return ApiResult.error("Cant get subjects list!", response.status);
+  }
 }
 
 async function fetchSubjectReviews(id: number, offset: number, amount: number): Promise<ApiResult<SubjectReview[]>> {
-  await sleep(1000);
-  const reviews: SubjectReview[] = [...Array(amount).keys()].map(x => ({
-    id: x,
-    rating: [1.2, 3, 2, 4, 5],
-    created: "10.03.2023",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat laboris, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...",
-    author: "Анонимно",
-    subject: "Предмет " + x
-  }));
-  return ApiResult.ok(reviews)
+  const url = `http://localhost:8888/api/subject/${id}/reviews?amount=${amount}&offset=${offset}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    mode: "cors",
+    headers: headers,
+  }) 
+  if (response.ok) {
+    const s: SubjectReview[] = (await response.json()).reviews;
+    s.push(s[0])
+    console.log(s);
+    return ApiResult.ok(s, response.status);
+  } else {
+    console.error("error " + await response.text());
+    return ApiResult.error("Cant get subjects list!", response.status);
+  }
 }
 
 export type {TeacherReview, SubjectReview, FullReview};

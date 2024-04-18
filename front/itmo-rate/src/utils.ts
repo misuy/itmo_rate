@@ -24,5 +24,12 @@ const emptySubject = () : Subject => ({
   avgRating: 0
 })
 
+const headers = {
+  "Content-Type": "application/json",
+  'Access-Control-Allow-Credentials' : "true",
+  'Access-Control-Allow-Origin':'*',
+  'Access-Control-Allow-Methods':'POST, OPTIONS, GET, PUT',
+  'Access-Control-Allow-Headers':'application/json',
+};
 
-export {sleep, emptyTeacher, emptySubject}
+export {sleep, emptyTeacher, emptySubject, headers}

@@ -1,4 +1,4 @@
-import { sleep } from "@/utils";
+import { headers, sleep } from "@/utils";
 import { ApiResult } from ".";
 import type { Criterion } from ".";
 
@@ -20,56 +20,38 @@ interface SubjectPreview {
 }
 
 async function fetchSubject(id: number) : Promise<ApiResult<Subject>> {
-  await sleep(1000);
-  return ApiResult.ok({
-    id: id,
-    name: "Основы проектной деятельности",
-    criteria: [
-      {
-        name: "Критерий 1",
-        rating: 5.7
-      },
-      {
-        name: "Критерий 2",
-        rating: 5.7
-      },
-      {
-        name: "Критерий 3",
-        rating: 8.2
-      },
-      {
-        name: "Критерий 4",
-        rating: 1.4
-      },
-      {
-        name: "Критерий 5",
-        rating: 4.4
-      },
-    ],
-    faculties: ["Вт", "ПИиКТ"],
-    lecturers: ["Клименков Сергей Викторович", "Соснов Николай Федорович"],
-    teachers:  ["Тимофеев Тихон Александрович", "Колпакова Екатерина Александровна", "Рябов Лука Макарович"],
-    avgRating: 10
-  });
+  const url = `http://localhost:8888/api/subject/${id}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    mode: "cors",
+    headers: headers,
+  }) 
+  if (response.ok) {
+    const s: Subject = (await response.json()).subject;
+    console.log(s);
+    return ApiResult.ok(s, response.status);
+  } else {
+    console.error("error " + await response.text());
+    return ApiResult.error("Cant get subjects list!", response.status);
+  }
 }
 
 async function fetchSubjectsList(offset: number, amount: number) 
   : Promise<ApiResult<SubjectPreview[]>> {
-  await sleep(1000);
-  return ApiResult.ok([
-    {
-      id: 1,
-      name: "Основы проектной деятельности",
-      tags: ["ПИиКТ", "Вт"],
-      score: 4.4
-    },
-    {
-      id: 2,
-      name: "ТПО",
-      tags: ["Вт", "ПИиКТ"],
-      score: 7.2
+    const url = `http://localhost:8888/api/subjects?amount=${amount}&offset=${offset}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      mode: "cors",
+      headers: headers,
+    }) 
+    if (response.ok) {
+      const s: SubjectPreview[] = (await response.json()).subjects; 
+      console.log(s);
+      return ApiResult.ok(s, response.status);
+    } else {
+      console.error("error " + await response.text());
+      return ApiResult.error("Cant get subjects list!", response.status);
     }
-  ])
 }
 
 export { fetchSubjectsList, fetchSubject }

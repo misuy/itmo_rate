@@ -25,7 +25,7 @@ console.log(props.pathPrefix);
 function openItemPage() {
   router.push(props.pathPrefix + props.info?.id);
 }
-
+console.log(props.info)
 </script>
 
 <template>
