@@ -30,7 +30,7 @@ watch(
 
 <style>
 .left-panel {
-  background-color: #eff1f6;
+  background: var(--panel-background-color);
   display: flex;
   align-items: center;
   flex-direction: column;

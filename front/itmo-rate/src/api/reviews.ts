@@ -42,5 +42,18 @@ async function fetchTeacherReviews(id: number, offset: number, amount: number): 
   return ApiResult.ok(reviews)
 }
 
+async function fetchSubjectReviews(id: number, offset: number, amount: number): Promise<ApiResult<SubjectReview[]>> {
+  await sleep(1000);
+  const reviews: SubjectReview[] = [...Array(amount).keys()].map(x => ({
+    id: x,
+    rating: [1.2, 3, 2, 4, 5],
+    created: "10.03.2023",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat laboris, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...",
+    author: "Анонимно",
+    subject: "Предмет " + x
+  }));
+  return ApiResult.ok(reviews)
+}
+
 export type {TeacherReview, SubjectReview, FullReview};
-export {fetchTeacherReviews}
+export {fetchTeacherReviews, fetchSubjectReviews}

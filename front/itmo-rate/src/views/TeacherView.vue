@@ -3,17 +3,17 @@ import RatingCircle from "@/components/RatingCircle.vue";
 import ListHeader from "@/components/ListHeader.vue";
 import TeacherReviewCard from "@/components/TeacherReviewCard.vue";
 import { useStore } from "vuex";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 const store = useStore();
 const route = useRoute();
 
 const id = Number(route.params.id);
-if (isNaN(id)) {
-  // error
-} else {
+if (id) {
   store.dispatch("getTeacher", id);
   store.dispatch("getTeacherReviews", {id, offset: 0, amount: 10});
+} else {
+  store.state.error = 404;
 }
 
 </script>

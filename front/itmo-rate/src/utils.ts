@@ -1,39 +1,28 @@
+import type { Subject } from "./api/subjects";
 import type { Teacher } from "./api/teachers";
 
 function sleep(time: number) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function emptyTeacher() : Teacher {
-  return {
+const emptyTeacher = () : Teacher => ({
     id: 0,
     name: "-",
     avatar: "",
-    criteria: [
-      {
-        name: "-",
-        rating: 0
-      },
-      {
-        name: "-",
-        rating: 0
-      },
-      {
-        name: "-",
-        rating: 0
-      },
-      {
-        name: "-",
-        rating: 0
-      },
-      {
-        name: "-",
-        rating: 0
-      },
-    ],
+    criteria: [],
     avgRating: 0,
     subjects: []
-  };
-}
+})
 
-export {sleep, emptyTeacher}
+const emptySubject = () : Subject => ({
+  id: 0,
+  name: "-",
+  criteria: [],
+  faculties: [],
+  lecturers: [],
+  teachers:  [],
+  avgRating: 0
+})
+
+
+export {sleep, emptyTeacher, emptySubject}

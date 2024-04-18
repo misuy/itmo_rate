@@ -1,7 +1,7 @@
 import type { TeacherPreview, Teacher } from "@/api/teachers";
 import type { State } from ".";
-import type { SubjectPreview } from "@/api/subjects";
-import type { TeacherReview } from "@/api/reviews";
+import type { Subject, SubjectPreview } from "@/api/subjects";
+import type { SubjectReview, TeacherReview } from "@/api/reviews";
 
 export default {
   gotTeachers(state: State, teachers: TeacherPreview[]) {
@@ -15,6 +15,12 @@ export default {
   },
   gotSubjects(state: State, subjects: SubjectPreview[]) {
     state.subjects = subjects;
+  },
+  gotSubjectReviews(state: State, reviews: SubjectReview[]) {
+    state.subjectReviews = reviews;
+  },
+  gotSubject(state: State, subject: Subject) {
+    state.currentSubject = subject;
   },
   setError(state: State, code: number) {
     state.error = code;
