@@ -8,16 +8,21 @@ import (
 )
 
 type SubjectDTO struct {
-	ID        uint
-	Name      string
-	Faculties []string
-	Criteria  []CriteriaDTO
-	AvgRating float32
-	Lecturers []string
-	Teachers  []string
+	ID        uint          `json:"id"`
+	Name      string        `json:"name"`
+	Faculties []string      `json:"faculties"`
+	Criteria  []CriteriaDTO `json:"criteria"`
+	AvgRating float32       `json:"avg_rating"`
+	Lecturers []string      `json:"lecturers"`
+	Teachers  []string      `json:"teachers"`
 }
 
 func SubjectDTOFromSubject(db *gorm.DB, subject *entities.Subject) (ret SubjectDTO, err error) {
+	err = db.Preload("MeanCriteriaList.List").Preload("Faculties").First(subject).Error
+	if err != nil {
+		return
+	}
+
 	criteriaList := CriteriaDTOListFromCriteriaList(&subject.MeanCriteriaList)
 	teachers, err := subject.GetTeachersByRole(db, "teacher")
 	if err != nil {

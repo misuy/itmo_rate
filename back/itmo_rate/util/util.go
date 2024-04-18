@@ -19,6 +19,9 @@ func Filter[T any](data []T, f func(T) bool) []T {
 }
 
 func Mean(data []float32) float32 {
+	if len(data) == 0 {
+		return 0
+	}
 	sum := float32(0)
 	for _, el := range data {
 		sum += el

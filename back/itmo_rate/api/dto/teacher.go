@@ -3,19 +3,26 @@ package dto
 import (
 	"itmo_rate/DB/entities"
 	"itmo_rate/util"
+
+	"gorm.io/gorm"
 )
 
 type TeacherDTO struct {
-	ID        uint
-	Name      string
-	Criteria  []CriteriaDTO
-	AvgRating float32
-	Subjects  []string
+	ID        uint          `json:"id"`
+	Name      string        `json:"name"`
+	Criteria  []CriteriaDTO `json:"criteria"`
+	AvgRating float32       `json:"avg_rating"`
+	Subjects  []string      `json:"subjects"`
 }
 
-func TeacherDTOFromTeacher(teacher *entities.Teacher) TeacherDTO {
+func TeacherDTOFromTeacher(db *gorm.DB, teacher *entities.Teacher) (ret TeacherDTO, err error) {
+	err = db.Preload("MeanCriteriaList.List").Preload("Subjects").First(teacher).Error
+	if err != nil {
+		return
+	}
+	println(len(teacher.MeanCriteriaList.List))
 	criteriaList := CriteriaDTOListFromCriteriaList(&teacher.MeanCriteriaList)
-	return TeacherDTO{
+	ret = TeacherDTO{
 		ID:       teacher.ID,
 		Name:     teacher.Name,
 		Criteria: criteriaList,
@@ -34,6 +41,7 @@ func TeacherDTOFromTeacher(teacher *entities.Teacher) TeacherDTO {
 			},
 		),
 	}
+	return
 }
 
 func (teacher TeacherDTO) ToObjectPreviewDTO() ObjectPreviewDTO {

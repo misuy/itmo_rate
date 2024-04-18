@@ -9,17 +9,24 @@ import (
 )
 
 type ReviewDTO struct {
-	ID        uint
-	Lecturers []string
-	Teachers  []string
-	Subject   string
-	Text      string
-	Author    string
-	Created   time.Time
-	Criteria  []CriteriaDTO
+	ID        uint          `json:"id"`
+	Lecturers []string      `json:"lecturers"`
+	Teachers  []string      `json:"teachers"`
+	Subject   string        `json:"subject"`
+	Text      string        `json:"text"`
+	Author    string        `json:"author"`
+	Created   time.Time     `json:"created"`
+	Criteria  []CriteriaDTO `json:"criteria"`
 }
 
 func ReviewDTOFromReview(db *gorm.DB, review *entities.Review) (ret ReviewDTO, err error) {
+	err = db.Preload("CriteriaList.List").First(review).Error
+	if err != nil {
+		return
+	}
+
+	println(len(review.CriteriaList.List))
+
 	lecturers, err := review.GetTeachersByRole(db, "lecturer")
 	if err != nil {
 		return
@@ -61,11 +68,11 @@ func ReviewDTOFromReview(db *gorm.DB, review *entities.Review) (ret ReviewDTO, e
 }
 
 type ReviewPreviewDTO struct {
-	ID      uint
-	Rating  []float32
-	Text    string
-	Created time.Time
-	Author  string
+	ID      uint      `json:"id"`
+	Rating  []float32 `json:"rating"`
+	Text    string    `json:"text"`
+	Created time.Time `json:"created"`
+	Author  string    `json:"author"`
 }
 
 func (review ReviewDTO) ToReviewPreviewDTO() ReviewPreviewDTO {

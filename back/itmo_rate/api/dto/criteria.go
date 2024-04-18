@@ -6,8 +6,8 @@ import (
 )
 
 type CriteriaDTO struct {
-	Name   string
-	Rating float32
+	Name   string  `json:"name"`
+	Rating float32 `json:"rating"`
 }
 
 func CriteriaDTOFromCriteria(criteria entities.Criteria) CriteriaDTO {
