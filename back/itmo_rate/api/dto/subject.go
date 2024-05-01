@@ -8,13 +8,14 @@ import (
 )
 
 type SubjectDTO struct {
-	ID        uint          `json:"id"`
-	Name      string        `json:"name"`
-	Faculties []string      `json:"faculties"`
-	Criteria  []CriteriaDTO `json:"criteria"`
-	AvgRating float32       `json:"avg_rating"`
-	Lecturers []string      `json:"lecturers"`
-	Teachers  []string      `json:"teachers"`
+	ID           uint          `json:"id"`
+	Name         string        `json:"name"`
+	Faculties    []string      `json:"faculties"`
+	ReviewsCount uint          `json:"reviews_count"`
+	Criteria     []CriteriaDTO `json:"criteria"`
+	AvgRating    float32       `json:"avg_rating"`
+	Lecturers    []string      `json:"lecturers"`
+	Teachers     []string      `json:"teachers"`
 }
 
 func SubjectDTOFromSubject(db *gorm.DB, subject *entities.Subject) (ret SubjectDTO, err error) {
@@ -41,7 +42,8 @@ func SubjectDTOFromSubject(db *gorm.DB, subject *entities.Subject) (ret SubjectD
 				return faculty.Name
 			},
 		),
-		Criteria: criteriaList,
+		ReviewsCount: subject.ReviewsCount,
+		Criteria:     criteriaList,
 		AvgRating: util.Mean(
 			util.Map(
 				criteriaList,
