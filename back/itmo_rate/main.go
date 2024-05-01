@@ -10,7 +10,7 @@ func main() {
 	if err != nil {
 		return
 	}
-	//DB.SaveTestData(db)
+	DB.SaveTestData(db)
 
 	api.Run(db, 8888)
 }

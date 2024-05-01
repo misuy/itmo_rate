@@ -1,6 +1,10 @@
 package entities
 
-import "gorm.io/gorm"
+import (
+	"itmo_rate/util"
+
+	"gorm.io/gorm"
+)
 
 type Subject struct {
 	gorm.Model
@@ -20,8 +24,24 @@ func NewSubject(name string) Subject {
 	}
 }
 
-func (subject *Subject) AddReviews(db *gorm.DB, reviews []Review) error {
-	return db.Model(subject).Association("Reviews").Append(reviews)
+func (subject *Subject) AddReview(db *gorm.DB, review *Review) (err error) {
+	err = db.Preload("MeanCriteriaList.List").First(subject).Error
+	if err != nil {
+		return
+	}
+
+	util.Apply(
+		subject.MeanCriteriaList.List,
+		func(criteria *Criteria) {
+			for _, reviewCriteria := range review.CriteriaList.List {
+				if criteria.Name == reviewCriteria.Name {
+					criteria.Value = (criteria.Value*float32(subject.ReviewsCount) + reviewCriteria.Value) / float32(subject.ReviewsCount+1)
+				}
+			}
+		},
+	)
+	subject.ReviewsCount++
+	return db.Model(subject).Association("Reviews").Append(review)
 }
 
 func (subject *Subject) GetTeachersByRole(db *gorm.DB, role string) (teachers []Teacher, err error) {

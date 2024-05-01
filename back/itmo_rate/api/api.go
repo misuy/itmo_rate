@@ -2,9 +2,10 @@ package api
 
 import (
 	"fmt"
+	"itmo_rate/api/endpoints"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"itmo_rate/api/endpoints"
 )
 
 func CORSMiddleware() gin.HandlerFunc {
@@ -36,6 +37,8 @@ func Run(db *gorm.DB, port uint) {
 	api.GET("/subject/:id/reviews", endpoints.SubjectReviewsEndpoint(db))
 	api.GET("/teacher/:id/reviews", endpoints.TeacherReviewsEndpoint(db))
 	api.GET("/review/:id", endpoints.ReviewEndpoint(db))
+
+	api.POST("/review", endpoints.AddReviewEndpoint(db))
 
 	router.Run(fmt.Sprintf(":%d", port))
 }

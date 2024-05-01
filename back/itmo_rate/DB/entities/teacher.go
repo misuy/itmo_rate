@@ -1,6 +1,10 @@
 package entities
 
-import "gorm.io/gorm"
+import (
+	"itmo_rate/util"
+
+	"gorm.io/gorm"
+)
 
 type Teacher struct {
 	gorm.Model
@@ -20,9 +24,10 @@ func NewTeacher(name string) Teacher {
 }
 
 type TeacherReviewRel struct {
-	TeacherID uint   `gorm:"primaryKey"`
-	ReviewID  uint   `gorm:"primaryKey"`
-	Role      string `gorm:"primaryKey"`
+	gorm.Model
+	TeacherID uint
+	ReviewID  uint
+	Role      string
 }
 
 func (TeacherReviewRel) TableName() string {
@@ -37,6 +42,22 @@ func NewTeacherReviewRel(teacher *Teacher, review *Review, role string) TeacherR
 	}
 }
 
-func (teacher *Teacher) AddReview(db *gorm.DB, review *Review, role string) error {
-	return db.Create(NewTeacherReviewRel(teacher, review, role)).Error
+func (teacher *Teacher) AddReview(db *gorm.DB, review *Review, role string) (err error) {
+	err = db.Preload("MeanCriteriaList.List").First(teacher).Error
+	if err != nil {
+		return
+	}
+	util.Apply(
+		teacher.MeanCriteriaList.List,
+		func(criteria *Criteria) {
+			for _, reviewCriteria := range review.CriteriaList.List {
+				if criteria.Name == reviewCriteria.Name {
+					criteria.Value = (criteria.Value*float32(teacher.ReviewsCount) + reviewCriteria.Value) / float32(teacher.ReviewsCount+1)
+				}
+			}
+		},
+	)
+	teacher.ReviewsCount++
+	rel := NewTeacherReviewRel(teacher, review, role)
+	return db.Create(&rel).Error
 }

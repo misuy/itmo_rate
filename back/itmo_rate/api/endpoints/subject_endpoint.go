@@ -30,7 +30,6 @@ func SubjectEndpoint(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		println(subjectDTO.AvgRating, subjectDTO.Name, subjectDTO.Teachers, subjectDTO.Faculties)
 		ctx.JSON(
 			http.StatusOK,
 			gin.H{

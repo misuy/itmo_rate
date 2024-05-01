@@ -8,6 +8,12 @@ func Map[T, U any](data []T, f func(T) U) []U {
 	return ret
 }
 
+func Apply[T any](data []T, f func(*T)) {
+	for i := range data {
+		f(&data[i])
+	}
+}
+
 func Filter[T any](data []T, f func(T) bool) []T {
 	ret := []T{}
 	for _, d := range data {

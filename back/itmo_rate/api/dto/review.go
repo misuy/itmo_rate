@@ -89,3 +89,51 @@ func (review ReviewDTO) ToReviewPreviewDTO() ReviewPreviewDTO {
 		Author:  review.Author,
 	}
 }
+
+type NewReviewDTO struct {
+	AuthorID    uint          `json:"author_id" binding:"required"`
+	LecturerID  uint          `json:"lecturer_id" binding:"required"`
+	TeacherID   uint          `json:"teacher_id" binding:"required"`
+	SubjectID   uint          `json:"subject_id" binding:"required"`
+	Criteria    []CriteriaDTO `json:"criteria" binding:"required"`
+	Text        string        `json:"text" binding:"required"`
+	IsAnonymous bool          `json:"is_anonymous" binding:"required"`
+}
+
+func (newReviewDTO NewReviewDTO) AddToDB(db *gorm.DB) (err error) {
+	lecturer, err := entities.GetById[entities.Teacher](db, newReviewDTO.LecturerID)
+	if err != nil {
+		return
+	}
+
+	teacher, err := entities.GetById[entities.Teacher](db, newReviewDTO.TeacherID)
+	if err != nil {
+		return
+	}
+
+	subject, err := entities.GetById[entities.Subject](db, newReviewDTO.SubjectID)
+	if err != nil {
+		return
+	}
+
+	user, err := entities.GetById[entities.User](db, newReviewDTO.AuthorID)
+	if err != nil {
+		return
+	}
+	println("---", user.ID, user.Name)
+
+	review := entities.NewReview(CriteriaDTOListToCriteriaList(newReviewDTO.Criteria), newReviewDTO.Text, newReviewDTO.IsAnonymous)
+	db.Create(&review)
+	println(review.ID, newReviewDTO.AuthorID, newReviewDTO.SubjectID, newReviewDTO.LecturerID, newReviewDTO.TeacherID, review.IsAnonymous, review.SubjectID, review.Text)
+	subject.AddReview(db, &review)
+	lecturer.AddReview(db, &review, "lecturer")
+	teacher.AddReview(db, &review, "teacher")
+	user.AddReview(db, &review)
+
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&subject)
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&review)
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&lecturer)
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&teacher)
+
+	return nil
+}

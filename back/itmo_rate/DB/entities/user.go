@@ -17,6 +17,6 @@ func NewUser(name string) User {
 	}
 }
 
-func (user *User) AddReviews(db *gorm.DB, reviews []Review) error {
-	return db.Model(user).Association("Reviews").Append(reviews)
+func (user *User) AddReview(db *gorm.DB, review *Review) error {
+	return db.Model(user).Association("Reviews").Append(review)
 }

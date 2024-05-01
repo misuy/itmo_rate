@@ -8,7 +8,7 @@ import (
 )
 
 func Open() (db *gorm.DB, err error) {
-	dsn := "host=localhost user=sample password=123456 dbname=course port=5432"
+	dsn := "host=localhost user=itmo_rate dbname=itmo_rate_db port=5432"
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return
@@ -68,22 +68,20 @@ func SaveTestData(db *gorm.DB) {
 
 	subjects[0].AddTeacher(db, &teachers[0], "teacher")
 	subjects[0].AddTeacher(db, &teachers[1], "lecturer")
-	subjects[0].AddReviews(db, []entities.Review{reviews[1]})
+	subjects[0].AddReview(db, &reviews[1])
 	subjects[1].AddTeacher(db, &teachers[0], "lecturer")
 	subjects[1].AddTeacher(db, &teachers[1], "teacher")
-	subjects[1].AddReviews(db, []entities.Review{reviews[0]})
+	subjects[1].AddReview(db, &reviews[0])
 
 	teachers[0].AddReview(db, &reviews[0], "lecturer")
 	teachers[0].AddReview(db, &reviews[1], "teacher")
 	teachers[1].AddReview(db, &reviews[0], "teacher")
 	teachers[1].AddReview(db, &reviews[1], "lecturer")
 
-	users[0].AddReviews(db, []entities.Review{reviews[0]})
-	users[1].AddReviews(db, []entities.Review{reviews[1]})
+	users[0].AddReview(db, &reviews[0])
+	users[1].AddReview(db, &reviews[1])
 
-	db.Save(&reviews)
-	db.Save(&users)
-	db.Save(&teachers)
-	db.Save(&subjects)
-	db.Save(&faculties)
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&subjects)
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&reviews)
+	db.Session(&gorm.Session{FullSaveAssociations: true}).Save(&teachers)
 }
