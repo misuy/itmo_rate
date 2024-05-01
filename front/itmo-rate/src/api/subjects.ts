@@ -6,10 +6,11 @@ interface Subject {
   id: number;
   name: string;
 	criteria: Criterion[];
-	avgRating: number;
+	avg_rating: number;
 	teachers: string[];
   lecturers: string[];
-  faculties: string[]
+  faculties: string[];
+  reviews_count: number;
 }
 
 interface SubjectPreview {

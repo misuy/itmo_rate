@@ -52,7 +52,7 @@ if (id) {
               </div>
             </div>
             <div class="subject-info-right">
-              <RatingAndReviewCircle :rating="$store.state.currentSubject.avgRating" style="width: 200px; height: 200px;" />
+              <RatingAndReviewCircle :reviews="$store.state.currentSubject.reviews_count" :rating="$store.state.currentSubject.avg_rating" style="width: 200px; height: 200px;" />
               <CommonButton text="Добавить отзыв" :icon="true" style="font-size: 18px; height: 35px; width: 260px;">
                 <template #icon>
                   <img src="../assets/icons/PlusIcon.svg">

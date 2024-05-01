@@ -7,7 +7,7 @@ interface Teacher {
   name: string;
   avatar: string;
 	criteria: Criterion[];
-	avgRating: number;
+	avg_rating: number;
 	subjects: string[];
 }
 

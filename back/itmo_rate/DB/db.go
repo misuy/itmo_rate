@@ -2,13 +2,14 @@ package DB
 
 import (
 	"itmo_rate/DB/entities"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func Open() (db *gorm.DB, err error) {
-	dsn := "host=localhost user=itmo_rate dbname=itmo_rate_db port=5432"
+	dsn := os.Getenv("DB_URL")
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return

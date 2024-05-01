@@ -20,7 +20,6 @@ const props = defineProps({
   info: Object as PropType<Info>,
 });
 const router = useRouter();
-
 function openItemPage() {
   router.push(props.pathPrefix + props.info?.id);
 }
@@ -28,7 +27,7 @@ function openItemPage() {
 
 <template>
   <div @click="openItemPage()" class="rated-list-item">
-    <RatingCircle :rating="props.info?.score" :radius="18" />
+    <RatingCircle :rating="props.info!.score" :radius="18" />
 
     <div class="rated-list-item-info-box">
       <div class="rated-list-item-name">

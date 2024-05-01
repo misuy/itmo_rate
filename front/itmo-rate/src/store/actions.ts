@@ -38,7 +38,7 @@ export default {
     commitResult(commit, "gotSubjects", result);
   },
   async getSubjectReviews ({ commit } : Params, {id, offset, amount} : any) {
-    commit("getSubjectReviews", []);
+    commit("gotSubjectReviews", []);
     const result = await fetchSubjectReviews(id, offset, amount);
     commitResult(commit, "gotSubjectReviews", result);
   },

@@ -28,7 +28,7 @@ export default {
 
 <template>
   <div class="container" :style="{background: computeColor}">
-    <span class="rating"> {{ rating }} </span>
+    <span class="rating"> {{ rating.toFixed(2) }} </span>
     <span class="reviews"> {{ reviews + " отзывов" }} </span>
   </div>
 </template>

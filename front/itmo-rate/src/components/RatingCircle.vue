@@ -4,7 +4,7 @@ export default {
   props: {
     rating: {
       type: Number,
-      default: 0
+      required: true
     },
     radius: {
       type: Number,
@@ -31,7 +31,7 @@ export default {
 
 <template>
   <div :style="{background: computeColor, width: computeSize, height: computeSize, borderRadius: computeSize}">
-    <span> {{ rating }} </span>
+    <span> {{ rating.toFixed(1) }} </span>
   </div>
 </template>
 
