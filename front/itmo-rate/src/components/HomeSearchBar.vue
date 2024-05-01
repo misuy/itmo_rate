@@ -10,8 +10,8 @@ watch(input, (input) => emit('inputChanged', input))
 
 <template>
   <div class="home-search-bar">
-    <input v-model="input" class="home-search-bar-input" type="text" placeholder="Преподаватель, предмет..." />
-    <img class="magnifier-icon" src="@/assets/icons/MagnifierIcon.svg" />
+    <input v-model="input" class="home-search-bar-input" type="text" placeholder="Преподаватель, предмет...">
+    <img class="magnifier-icon" src="@/assets/icons/MagnifierIcon.svg">
   </div>
 </template>
 

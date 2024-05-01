@@ -64,6 +64,7 @@ if (id) {
             <ReviewCard
               v-for="card in $store.state.subjectReviews" :key="card.id"
               :date="card.created" :text="card.text" :subject="card.subject" :rating="card.rating"
+              class="review-card"
             />
           </div>
         </div>
@@ -146,19 +147,25 @@ h3 {
   background: var(--background-blue-color);
 }
 
-@media screen and (max-width: 1300px) {
-  .reviews-block {
-    columns: 1 auto;
-    margin-top: 45px;
+.reviews-block {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media screen and (min-width: 1300px) {
+  .review-card {
+    width: 43%;
   }
 }
 
-@media screen and (min-width: 1300px) {
-  .reviews-block {
-    columns: 2 auto;
-    margin-top: 45px;
+@media screen and (max-width: 1300px) {
+  .review-card {
+    width: 100%;
   }
 }
+
 
 .content {
   /*border: solid red 2px;*/

@@ -36,6 +36,9 @@ export default defineComponent({
         return "#ABE364";
       else
         return "#85E364";
+    },
+    getDate() : String {
+      return new Date(this.date).toLocaleString()
     }
   }
 })
@@ -49,7 +52,7 @@ export default defineComponent({
       </div>
       <div>
         <h4>{{ subject }}</h4>
-        <span> {{ date }}</span>
+        <span> {{ getDate }}</span>
       </div>
     </div>
     <div class="h-line" style="margin-top: 15px;" />

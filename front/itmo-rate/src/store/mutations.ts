@@ -1,5 +1,5 @@
 import type { TeacherPreview, Teacher } from "@/api/teachers";
-import type { State } from ".";
+import type { SearchState, State } from ".";
 import type { Subject, SubjectPreview } from "@/api/subjects";
 import type { SubjectReview, TeacherReview } from "@/api/reviews";
 
@@ -24,5 +24,8 @@ export default {
   },
   setError(state: State, code: number) {
     state.error = code;
+  },
+  setSearchState(state: State, searchState: SearchState) {
+    state.searchState = searchState;
   }
 }

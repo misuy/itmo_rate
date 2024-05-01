@@ -55,7 +55,6 @@ async function fetchSubjectReviews(id: number, offset: number, amount: number): 
   }) 
   if (response.ok) {
     const s: SubjectReview[] = (await response.json()).reviews;
-    s.push(s[0])
     console.log(s);
     return ApiResult.ok(s, response.status);
   } else {

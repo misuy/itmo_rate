@@ -7,7 +7,7 @@ export default {
       type: Array<number>,
       default: [0, 0, 0, 0, 0],
       validator: (value: Array<Number>) => value.length == 5
-    }
+    },
   },
   methods: {
     computeColor(rating: number) {
@@ -26,12 +26,12 @@ export default {
 
 <template>
   <div class="container">
-    <div v-for="s in score" class="rating-rect">
+    <div v-for="(s, i) in score" :key="i" class="rating-rect">
       <div class="rating" :style="{background: computeColor(s)}">
         <span>{{ s }}</span>
       </div>
       <div class="char">
-        A
+        {{ "K" + (i + 1) }}
       </div>
     </div>
   </div>
@@ -68,7 +68,8 @@ export default {
   width: 100%;
   padding-top: 10px;
   text-align: center;
-  color: var(--text-color);
+  /* color: var(--text-color-2); */
+  font-weight: 600;
 }
 
 </style>

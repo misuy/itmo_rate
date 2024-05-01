@@ -13,7 +13,15 @@ interface State {
   currentTeacher: Teacher;
   currentSubject: Subject;
   teacherReviews: TeacherReview[];
-  subjectReviews: SubjectReview[]
+  subjectReviews: SubjectReview[],
+  searchState: SearchState
+}
+
+enum SearchState {
+  IDLE,
+  NOTHING_FOUND,
+  FETCHING,
+  FOUND
 }
 
 export default createStore({
@@ -25,7 +33,8 @@ export default createStore({
       teacherReviews: [],
       subjectReviews: [],
       currentTeacher: emptyTeacher(),
-      currentSubject: emptySubject()
+      currentSubject: emptySubject(),
+      searchState: SearchState.IDLE
     }
   },
   mutations: mutations,
@@ -33,3 +42,4 @@ export default createStore({
 })
 
 export type { State }
+export { SearchState }

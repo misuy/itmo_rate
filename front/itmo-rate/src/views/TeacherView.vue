@@ -50,6 +50,7 @@ if (id) {
             <TeacherReviewCard
               v-for="rev in $store.state.teacherReviews" :key="rev.id"
               :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating[0]"
+              class="review-card"
             />
           </div>
         </div>
@@ -97,9 +98,10 @@ h3 {
 
 .classes-block {
   margin-top: 25px;
+  min-width: 300px;
   position: relative;
 }
-.teachers-block
+
 .classes-block li::marker {
   content: ' ';
 }
@@ -123,21 +125,28 @@ h3 {
   background: var(--background-yellow-color);
 }
 
-@media screen and (max-width: 1300px) {
-  .reviews-block {
-    columns: 1 auto;
-    margin-top: 45px;
+.reviews-block {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media screen and (min-width: 1300px) {
+  .review-card {
+    width: 43%;
   }
 }
 
-@media screen and (min-width: 1300px) {
-  .reviews-block {
-    columns: 2 auto;
-    margin-top: 45px;
+@media screen and (max-width: 1300px) {
+  .review-card {
+    width: 100%;
   }
 }
+
 
 .content {
+  width: 100%;
   /*border: solid red 2px;*/
   /* width: 100%;
   margin-top: 30px;

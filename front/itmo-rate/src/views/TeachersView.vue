@@ -5,7 +5,7 @@ import { useStore } from 'vuex';
 const store = useStore();
 store.dispatch("getTeachers", {
   offset: 0,
-  amount: 10
+  amount: 50
 });
 
 </script>

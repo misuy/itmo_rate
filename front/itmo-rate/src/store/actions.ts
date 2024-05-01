@@ -1,9 +1,9 @@
-import type { State } from ".";
+import { SearchState, type State } from ".";
 import { fetchTeachersList, fetchTeacher} from "@/api/teachers"
 import { fetchSubject, fetchSubjectsList } from "@/api/subjects";
 import { emptySubject, emptyTeacher } from "@/utils";
 import { fetchTeacherReviews, fetchSubjectReviews } from "@/api/reviews";
-import type { ApiResult } from "@/api";
+import { fetchSearch, type ApiResult } from "@/api";
 
 interface Params {
   commit: any;
@@ -46,5 +46,20 @@ export default {
     commit("gotSubject", emptySubject());
     const result = await fetchSubject(id);
     commitResult(commit, "gotSubject", result);
+  },
+  async search ({ commit } : Params, text: string) {
+    commit("setSearchState", SearchState.FETCHING);
+    const result = await fetchSearch(text);
+    if (result.ok) {
+      if (result.payload?.subjects.length == 0 && result.payload?.teachers.length == 0) {
+        commit("setSearchState", SearchState.NOTHING_FOUND);
+      } else {
+        commit("setSearchState", SearchState.FOUND);
+        commit("gotSubjects", result.payload?.subjects);
+        commit("gotTeachers", result.payload?.teachers);
+      }
+    } else {
+      commit("setSearchState", SearchState.NOTHING_FOUND);
+    }
   }
 }

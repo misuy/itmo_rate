@@ -20,12 +20,10 @@ const props = defineProps({
   info: Object as PropType<Info>,
 });
 const router = useRouter();
-console.log(props.pathPrefix);
 
 function openItemPage() {
   router.push(props.pathPrefix + props.info?.id);
 }
-console.log(props.info)
 </script>
 
 <template>

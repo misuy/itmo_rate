@@ -1,3 +1,7 @@
+import { headers } from "@/utils";
+import type { SubjectPreview } from "./subjects";
+import type { TeacherPreview } from "./teachers";
+
 class ApiResult<T> {
   ok: boolean;
   payload: T | null;
@@ -20,6 +24,29 @@ interface Criterion {
   rating: number;
 }
 
+interface SearchResult {
+  subjects: SubjectPreview[],
+  teachers: TeacherPreview[]
+}
 
-export {ApiResult}
+async function fetchSearch(text: string) 
+  : Promise<ApiResult<SearchResult>> {
+    const url = `http://localhost:8888/api/search?type=both&text=${text}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      mode: "cors",
+      headers: headers,
+    }) 
+    if (response.ok) {
+      const s: SearchResult = await response.json(); 
+      console.log("ok: ", s);
+      return ApiResult.ok(s, response.status);
+    } else {
+      console.error("error " + await response.text());
+      return ApiResult.error("Cant get search result!", response.status);
+    }
+}
+
+
+export {ApiResult, fetchSearch}
 export type {Criterion}

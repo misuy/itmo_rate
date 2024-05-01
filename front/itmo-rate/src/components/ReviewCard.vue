@@ -22,6 +22,9 @@ export default defineComponent({
   computed: {
     truncText() : string {
       return this.text.length > 375 ? this.text.substring(0, 375) + "..." : this.text;
+    },
+    getDate() : String {
+      return new Date(this.date).toLocaleString()
     }
   }
 })
@@ -37,7 +40,7 @@ export default defineComponent({
     <div class="under-block">
       <CommonButton text="Читать" style="width: 80px;" />
       <span>
-        {{ date }}<br>
+        {{ getDate }}<br>
         {{ author }}
       </span>
     </div>
