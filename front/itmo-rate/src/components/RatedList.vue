@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useStore } from 'vuex';
 import ListHeader from './ListHeader.vue';
 import RatedListItem from './RatedListItem.vue';
 import type { PropType } from 'vue';

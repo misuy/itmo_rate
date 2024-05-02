@@ -27,7 +27,7 @@ async function fetchTeacher(id: number) : Promise<ApiResult<Teacher>>  {
   }) 
   if (response.ok) {
     const s: Teacher = (await response.json()).teacher;
-    s.avatar = "https://photo.itmo.su/avatar/8864a7e8b3d285daa5e12eec5ab6a82c782b2804/cover/320/320/"
+    s.avatar = "https://img.freepik.com/premium-vector/gary-avatar-without-gender-vector-illustration_276184-164.jpg"
     console.log(s);
     return ApiResult.ok(s, response.status);
   } else {

@@ -23,6 +23,9 @@ const router = useRouter();
 function openItemPage() {
   router.push(props.pathPrefix + props.info?.id);
 }
+
+const store = useStore();
+const unique = () => Array.from(new Set(props.info?.tags));
 </script>
 
 <template>
@@ -36,7 +39,7 @@ function openItemPage() {
       <div class="rated-list-item-tags-box">
         <ChipComponent
           style="font-size: 13px" 
-          v-for="(tag, idx) in props.info?.tags" :key="tag" 
+          v-for="(tag, idx) in unique(props.info?.tags)" :key="tag" 
           :text="tag" 
           :color="idx % 2 == 0 ? 'yellow' : 'blue'"
         />

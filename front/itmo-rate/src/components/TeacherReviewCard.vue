@@ -52,7 +52,7 @@ export default defineComponent({
   <div class="card-body">
     <div class="top-bar">
       <div class="rating-container" :style="{background: computeColor}">
-        {{ score }}
+        {{ score.toFixed(1) }}
       </div>
       <div>
         <h4>{{ subject }}</h4>

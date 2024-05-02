@@ -16,6 +16,9 @@ if (id) {
   store.state.error = 404;
 }
 
+const unique = () => Array.from(new Set(store.state.currentTeacher.subjects));
+const avg_score = (scores: number[]) => scores.reduce( ( p, c ) => p + c, 0 ) / scores.length;
+
 </script>
 
 <template>
@@ -49,7 +52,7 @@ if (id) {
           <div class="reviews-block">
             <TeacherReviewCard
               v-for="rev in $store.state.teacherReviews" :key="rev.id"
-              :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating[0]"
+              :date="rev.created" :text="rev.text" :subject="rev.subject" :score="avg_score(rev.rating)"
               :id="rev.id"
               class="review-card"
             />
@@ -57,9 +60,9 @@ if (id) {
         </div>
         <div class="side-column">
           <div class="classes-block yellow">
-            <ListHeader name="Предметы" :count="$store.state.currentTeacher.subjects.length" :font-size="20" />
+            <ListHeader name="Предметы" :count="unique().length" :font-size="20" />
             <ul>
-              <li v-for="subj in $store.state.currentTeacher.subjects" :key="subj"> 
+              <li v-for="subj in unique()" :key="subj"> 
                 {{ subj }}
               </li>
             </ul>
