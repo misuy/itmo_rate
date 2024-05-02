@@ -18,6 +18,8 @@ func UserEndpoint(db *gorm.DB) gin.HandlerFunc {
 			ctx.JSON(http.StatusNotFound, gin.H{})
 			return
 		}
-		ctx.JSON(http.StatusOK, dto.UserDTOFromUser(&user))
+		userDto := dto.UserDTOFromUser(&user)
+		userDto.Role = "user"
+		ctx.JSON(http.StatusOK, userDto)
 	}
 }

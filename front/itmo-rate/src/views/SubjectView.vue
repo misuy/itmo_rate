@@ -64,6 +64,7 @@ if (id) {
             <ReviewCard
               v-for="card in $store.state.subjectReviews" :key="card.id"
               :date="card.created" :text="card.text" :subject="card.subject" :rating="card.rating"
+              :id="card.id"
               class="review-card"
             />
           </div>

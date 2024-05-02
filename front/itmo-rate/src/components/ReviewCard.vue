@@ -7,6 +7,10 @@ export default defineComponent({
   name: "ReviewCard",
   components: {RatingBar, CommonButton},
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
     text: {
       type: String,
       default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat laboris, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nostrud exercitation"
@@ -16,7 +20,10 @@ export default defineComponent({
       default: [0, 0, 0, 0, 0],
       validator: (value: Array<Number>) => value.length == 5
     },
-    date: String,
+    date: {
+      type: String,
+      default: ""
+    },
     author: String
   },
   computed: {
@@ -32,13 +39,16 @@ export default defineComponent({
 
 <template>
   <div class="card-body">
-    <RatingBar :score="rating" />
+    <RatingBar :score="rating" style="height: 72px;" />
     <div class="h-line" style="margin-top: 15px;" />
     <p>
       {{ truncText }}
     </p>
     <div class="under-block">
-      <CommonButton text="Читать" style="width: 80px;" />
+      <CommonButton
+        text="Читать" style="width: 80px;" 
+        @click="() => { $store.dispatch('getReview', id); }"
+      />
       <span>
         {{ getDate }}<br>
         {{ author }}

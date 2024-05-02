@@ -7,8 +7,7 @@ export default defineComponent ({
   components: {OutlineButton},
   props: {
     authorized: Boolean,
-    firstName: String,
-    secondName: String
+    name: String,
   }
 })
 
@@ -21,10 +20,7 @@ export default defineComponent ({
         <img class="user-img" src="../assets/icons/UserIcon.svg">
         <div class="user-name">
           <div class="user-name-surname">
-            {{ firstName }}
-          </div>
-          <div class="user-name-name">
-            {{ secondName }}
+            {{ name }}
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ watch(
     </div>
 
     <div class="user-box-holder">
-      <UserBox first-name="123" second-name="321" />
+      <UserBox name="Ненов Владислав" :authorized="true" />
     </div>
   </div>
 </template>

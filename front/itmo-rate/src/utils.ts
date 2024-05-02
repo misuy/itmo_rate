@@ -1,3 +1,4 @@
+import type { Review } from "./api/reviews";
 import type { Subject } from "./api/subjects";
 import type { Teacher } from "./api/teachers";
 
@@ -10,7 +11,7 @@ const emptyTeacher = () : Teacher => ({
     name: "-",
     avatar: "",
     criteria: [],
-    avgRating: 0,
+    avg_rating: 0,
     subjects: []
 })
 
@@ -21,7 +22,44 @@ const emptySubject = () : Subject => ({
   faculties: [],
   lecturers: [],
   teachers:  [],
-  avgRating: 0
+  avg_rating: 0,
+  reviews_count: 0
+})
+
+const emptyReview = () : Review => ({
+  "id": -1,
+  "lecturers": [
+    ""
+  ],
+  "teachers": [
+    ""
+  ],
+  "subject": "",
+  "text": "",
+  "author": "",
+  "created": "",
+  "criteria": [
+    {
+      "name": "Критерий 1",
+      "rating": 0
+    },
+    {
+      "name": "Критерий 2",
+      "rating": 0
+    },
+    {
+      "name": "Критерий 3",
+      "rating": 0
+    },
+    {
+      "name": "Критерий 4",
+      "rating": 0
+    },
+    {
+      "name": "Критерий 5",
+      "rating": 0
+    }
+  ]
 })
 
 const headers = {
@@ -32,4 +70,4 @@ const headers = {
   'Access-Control-Allow-Headers':'application/json',
 };
 
-export {sleep, emptyTeacher, emptySubject, headers}
+export {sleep, emptyTeacher, emptySubject, emptyReview, headers}

@@ -1,6 +1,17 @@
 import { headers, sleep } from "@/utils";
 import { ApiResult, type Criterion } from ".";
 
+interface Review {
+  id: number;
+  lecturers: string[];
+  teachers: string[];
+  subject: string;
+  created: string;
+  criteria: Criterion[];
+  text: string;
+  author: string;
+}
+
 interface TeacherReview {
   id: number;
   rating: number;
@@ -63,5 +74,24 @@ async function fetchSubjectReviews(id: number, offset: number, amount: number): 
   }
 }
 
-export type {TeacherReview, SubjectReview, FullReview};
-export {fetchTeacherReviews, fetchSubjectReviews}
+async function fetchReview(id: number): Promise<ApiResult<Review>> {
+  const url = `http://localhost:8888/api/review/${id}`;
+  console.log(url);
+  const response = await fetch(url, {
+    method: 'GET',
+    mode: "cors",
+    headers: headers,
+  }) 
+  if (response.ok) {
+    const s: Review = (await response.json()).review;
+    console.log(s);
+    return ApiResult.ok(s, response.status);
+  } else {
+    console.error("error " + await response.text());
+    return ApiResult.error("Cant get review!", response.status);
+  }
+}
+
+
+export type {TeacherReview, SubjectReview, FullReview, Review};
+export {fetchTeacherReviews, fetchSubjectReviews, fetchReview}

@@ -46,7 +46,7 @@ import TeachersIcon from "@/components/icons/TeachersIcon.vue";
   </div>
 </template>
 
-<style>
+<style scoped>
 .nav-box {
   display: flex;
   align-items: center;

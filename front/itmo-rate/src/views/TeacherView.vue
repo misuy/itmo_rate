@@ -50,6 +50,7 @@ if (id) {
             <TeacherReviewCard
               v-for="rev in $store.state.teacherReviews" :key="rev.id"
               :date="rev.created" :text="rev.text" :subject="rev.subject" :score="rev.rating[0]"
+              :id="rev.id"
               class="review-card"
             />
           </div>

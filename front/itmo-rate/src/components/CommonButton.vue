@@ -2,7 +2,10 @@
 export default {
   name: "CommonButton",
   props: {
-    text: String,
+    text: {
+      type: String,
+      default: ""
+    },
     icon: {
       type: Boolean,
       default: false

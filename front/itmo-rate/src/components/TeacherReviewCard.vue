@@ -6,6 +6,10 @@ export default defineComponent({
   name: "TeacherReviewCard",
   components: {CommonButton},
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
     text: {
       type: String,
       default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat laboris, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nostrud exercitation"
@@ -60,7 +64,10 @@ export default defineComponent({
       {{ truncText }}
     </p>
     <div class="under-block">
-      <CommonButton text="Читать" style="width: 80px;" />
+      <CommonButton
+        text="Читать" style="width: 80px;" 
+        @click="() => { $store.dispatch('getReview', id); }"
+      />
       <span>
         Анонимно
       </span>

@@ -1,8 +1,8 @@
-import { SearchState, type State } from ".";
+import { ModalState, SearchState, type State } from ".";
 import { fetchTeachersList, fetchTeacher} from "@/api/teachers"
 import { fetchSubject, fetchSubjectsList } from "@/api/subjects";
 import { emptySubject, emptyTeacher } from "@/utils";
-import { fetchTeacherReviews, fetchSubjectReviews } from "@/api/reviews";
+import { fetchTeacherReviews, fetchSubjectReviews, fetchReview } from "@/api/reviews";
 import { fetchSearch, type ApiResult } from "@/api";
 
 interface Params {
@@ -61,5 +61,11 @@ export default {
     } else {
       commit("setSearchState", SearchState.NOTHING_FOUND);
     }
-  }
+  },
+  async getReview ({ commit } : Params, id: number) {
+    commit("gotReview", null);
+    const result = await fetchReview(id);
+    commitResult(commit, "gotReview", result);
+    commit("setModalState", ModalState.REVIEW_READ_MODE);
+  },
 }

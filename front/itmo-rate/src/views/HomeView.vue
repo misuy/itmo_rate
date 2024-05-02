@@ -4,16 +4,6 @@ import RatedList from '@/components/RatedList.vue';
 import { useStore } from 'vuex';
 import { SearchState } from '@/store';
 
-// const testSubjects = [new RatedListItemInfo(6.8, 'Основы проектной деятельности', ['ПИиКТ', 'BT']), new RatedListItemInfo(2.8, 'ТПО', ['ПИиКТ', 'BT', 'Нейротех'])];
-// const testTeachers = [new RatedListItemInfo(4.4, 'Соснов Николай Федорович', ['Методы криптографии', 'Компьютерные сети', 'ТПО']), new RatedListItemInfo(7.2, 'Соснов Семен Федорович', ['Методы криптографии', 'Компьютерные сети', 'ТПО'])]
-// const testSubjects = []
-// const testTeachers = []
-
-
-// const substr = ref('')
-// const relatedSubjects = computed(() => testSubjects.filter((item) => item.name.toLowerCase().includes(substr.value.toLowerCase())))
-// const relatedTeachers = computed(() => testTeachers.filter((item) => item.name.toLowerCase().includes(substr.value.toLowerCase())))
-
 const store = useStore();
 store.commit("gotTeachers", []);
 store.commit("gotSubjects", []);

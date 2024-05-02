@@ -51,12 +51,12 @@ export default {
 
 .rating-rect {
   width: 62px;
-  height: 72px;
+  height: 100%;
 }
 
 .rating {
   width: 100%;
-  height: 42px;
+  height: 50%;
   color: white;
   display: flex;
   align-items: center;
@@ -68,6 +68,7 @@ export default {
   width: 100%;
   padding-top: 10px;
   text-align: center;
+  height: 50%;
   /* color: var(--text-color-2); */
   font-weight: 600;
 }
